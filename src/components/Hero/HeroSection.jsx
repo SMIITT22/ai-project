@@ -20,7 +20,7 @@ const HeroSection = () => {
       </Typography>
       <Typography
         variant="lead"
-        className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold font-poppins text-black mb-10 max-w-3xl"
+        className="text-base sm:text-lg md:text-xl lg:text-2xl font-poppins text-black mb-10 max-w-3xl"
       >
         Use our platform to generate custom NEET questions for Chemistry,
         Physics, and Biology using AI. Experience free question generation with
