@@ -30,9 +30,9 @@ const Header = () => {
           <Typography
             as="a"
             href="#"
-            className="mr-4 cursor-pointer py-1.5 font-medium"
+            className="mr-4 cursor-pointer py-1.5 font-medium font-gloria"
           >
-            Material Tailwind
+            Question genrator
           </Typography>
           <div className="flex items-center gap-4">
             <div className="hidden lg:flex items-center gap-x-1">
