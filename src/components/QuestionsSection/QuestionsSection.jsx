@@ -5,7 +5,7 @@ const QuestionsSection = () => {
   return (
     <>
       <Divider />
-      <div className="flex flex-col items-center justify-center px-6 md:px-16 lg:px-24 bg-white text-center lg:pt-20 pb-10 pt-10">
+      <div className="flex flex-col items-center justify-center px-6 md:px-16 lg:px-24 bg-white text-center pt-20 pb-10">
         <Typography
           variant="h2"
           className="text-2xl sm:text-3xl md:text-4xl font-poppins text-black font-bold mb-6"
