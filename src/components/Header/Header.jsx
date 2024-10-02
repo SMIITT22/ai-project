@@ -39,7 +39,7 @@ const Header = () => {
               <Button variant="text" size="sm">
                 <span>Log In</span>
               </Button>
-              <Button variant="gradient" size="sm">
+              <Button variant="gradient" size="sm" color="green">
                 <span>Sign in</span>
               </Button>
             </div>
@@ -94,6 +94,7 @@ const Header = () => {
                   <Button
                     fullWidth
                     variant="gradient"
+                    color="green"
                     size="sm"
                     className="py-2"
                   >

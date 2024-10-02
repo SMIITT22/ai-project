@@ -1,6 +1,6 @@
 import { Typography, Button } from "@material-tailwind/react";
 import { BsStars } from "react-icons/bs";
-import { AiOutlineUnlock } from "react-icons/ai";
+import { SiGnuprivacyguard } from "react-icons/si";
 
 const HeroSection = () => {
   return (
@@ -16,15 +16,15 @@ const HeroSection = () => {
         variant="h1"
         className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-gloria text-black font-bold mb-10"
       >
-        Generate NEET Questions Instantly with AI!
+        Create Custom Exam Papers Instantly with AI!
       </Typography>
       <Typography
         variant="lead"
         className="text-base sm:text-lg md:text-xl lg:text-2xl font-poppins text-black mb-10 max-w-3xl"
       >
-        Use our platform to generate custom NEET questions for Chemistry,
-        Physics, and Biology using AI. Experience free question generation with
-        limited access.
+        Currently focused on NEET, our platform helps you generate custom exam
+        papers for Chemistry, Physics, and Biology with AI. More exams coming
+        soon!
       </Typography>
       <div className="flex flex-col sm:flex-row gap-4">
         <Button
@@ -32,7 +32,7 @@ const HeroSection = () => {
           size="lg"
           className="transition-transform text-black bg-gray-300 border-gray-400 font-poppins flex items-center justify-center gap-2 whitespace-nowrap w-full sm:w-auto md:min-w-[300px]"
         >
-          Generate Free NEET Questions
+          Explore NEET Questions
           <BsStars size={24} />
         </Button>
         <Button
@@ -41,8 +41,8 @@ const HeroSection = () => {
           size="lg"
           className="transition-transform text-white font-poppins flex items-center justify-center gap-2 whitespace-nowrap w-full sm:w-auto md:min-w-[300px]"
         >
-          Unlock Full Question Generation
-          <AiOutlineUnlock size={24} />
+          Sign Up Now
+          <SiGnuprivacyguard size={24} />
         </Button>
       </div>
     </div>

@@ -1,4 +1,5 @@
-import { Typography, Button } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
+import { chemisteryGIF, physicsGIF, bioGIF, neetGIF } from "../../assets/index";
 
 const SampleQuestionsSection = () => {
   return (
@@ -7,51 +8,69 @@ const SampleQuestionsSection = () => {
         variant="h2"
         className="text-2xl sm:text-3xl md:text-4xl font-gloria text-black font-bold mb-6"
       >
-        Explore Sample AI-Generated NEET Questions
+        Explore AI-Generated NEET Questions
       </Typography>
-
       <Typography
         variant="lead"
         className="text-base sm:text-lg md:text-xl font-poppins text-black mb-10 max-w-3xl"
       >
-        Take a look at sample AI-generated NEET questions for Chemistry,
-        Physics, and Biology. These examples give you a glimpse of the question
-        types you’ll be working with when you generate full exam papers.
+        TGet a sneak peek of AI-generated NEET questions for Chemistry, Physics,
+        and Biology. Start preparing for your exam with sample questions
+        designed to help you excel.
       </Typography>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:grid-cols-4">
-        <Button
-          variant="outlined"
-          size="lg"
-          className="text-black border-gray-400 font-poppins"
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <a
+          href="/chemistry-questions"
+          className="group flex flex-col items-center"
         >
-          View Chemistry Questions
-        </Button>
-
-        <Button
-          variant="outlined"
-          size="lg"
-          className="text-black border-gray-400 font-poppins"
+          <img
+            src={chemisteryGIF}
+            alt="View Chemistry Questions"
+            className="w-24 h-24 object-contain mb-4 transform transition-transform group-hover:scale-105"
+          />
+          <Typography variant="h6" className="font-poppins text-black">
+            Chemistry Questions
+          </Typography>
+        </a>
+        <a
+          href="/physics-questions"
+          className="group flex flex-col items-center"
         >
-          View Physics Questions
-        </Button>
-
-        <Button
-          variant="outlined"
-          size="lg"
-          className="text-black border-gray-400 font-poppins"
+          <img
+            src={physicsGIF}
+            alt="View Physics Questions"
+            className="w-24 h-24 object-contain mb-4 transform transition-transform group-hover:scale-105"
+          />
+          <Typography variant="h6" className="font-poppins text-black">
+            Physics Questions
+          </Typography>
+        </a>
+        <a
+          href="/biology-questions"
+          className="group flex flex-col items-center"
         >
-          View Biology Questions
-        </Button>
-
-        <Button
-          variant="gradient"
-          color="green"
-          size="lg"
-          className="text-white font-poppins"
+          <img
+            src={bioGIF}
+            alt="View Biology Questions"
+            className="w-24 h-24 object-contain mb-4 transform transition-transform group-hover:scale-105"
+          />
+          <Typography variant="h6" className="font-poppins text-black">
+            Biology Questions
+          </Typography>
+        </a>
+        <a
+          href="/full-neet-paper"
+          className="group col-span-1 flex flex-col items-center"
         >
-          Preview Full NEET Paper
-        </Button>
+          <img
+            src={neetGIF}
+            alt="View NEET Paper"
+            className="w-24 h-24 object-contain mb-4 transform transition-transform group-hover:scale-105"
+          />
+          <Typography variant="h6" className="font-poppins text-black">
+            Full NEET Paper
+          </Typography>
+        </a>
       </div>
     </div>
   );
