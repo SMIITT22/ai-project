@@ -25,7 +25,7 @@ const SampleQuestionsSection = () => {
             alt="View Chemistry Questions"
             className="w-24 h-24 object-contain mb-4"
           />
-          <a href="/chemistry-questions" className="group">
+          <div className="group">
             <Typography
               variant="h6"
               className="font-poppins text-black underline hover:no-underline group-hover:text-green-500"
@@ -36,7 +36,7 @@ const SampleQuestionsSection = () => {
             >
               Chemistry Questions
             </Typography>
-          </a>
+          </div>
         </div>
         <div className="flex flex-col items-center">
           <img
@@ -44,7 +44,7 @@ const SampleQuestionsSection = () => {
             alt="View Physics Questions"
             className="w-24 h-24 object-contain mb-4"
           />
-          <a href="/physics-questions" className="group">
+          <div className="group">
             <Typography
               variant="h6"
               className="font-poppins text-black underline hover:no-underline group-hover:text-green-500"
@@ -55,7 +55,7 @@ const SampleQuestionsSection = () => {
             >
               Physics Questions
             </Typography>
-          </a>
+          </div>
         </div>
         <div className="flex flex-col items-center">
           <img
@@ -63,7 +63,7 @@ const SampleQuestionsSection = () => {
             alt="View Biology Questions"
             className="w-24 h-24 object-contain mb-4"
           />
-          <a href="/biology-questions" className="group">
+          <div className="group">
             <Typography
               variant="h6"
               className="font-poppins text-black underline hover:no-underline group-hover:text-green-500"
@@ -74,7 +74,7 @@ const SampleQuestionsSection = () => {
             >
               Biology Questions
             </Typography>
-          </a>
+          </div>
         </div>
         <div className="col-span-1 flex flex-col items-center">
           <img
@@ -82,7 +82,7 @@ const SampleQuestionsSection = () => {
             alt="View NEET Paper"
             className="w-24 h-24 object-contain mb-4"
           />
-          <a href="/full-neet-paper" className="group">
+          <div className="group">
             <Typography
               variant="h6"
               className="font-poppins text-black underline hover:no-underline group-hover:text-green-500"
@@ -93,7 +93,7 @@ const SampleQuestionsSection = () => {
             >
               Full NEET Paper
             </Typography>
-          </a>
+          </div>
         </div>
       </div>
     </div>
