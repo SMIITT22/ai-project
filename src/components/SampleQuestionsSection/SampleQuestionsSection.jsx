@@ -14,7 +14,7 @@ const SampleQuestionsSection = () => {
         variant="lead"
         className="text-base sm:text-lg md:text-xl font-poppins text-black mb-10 max-w-3xl"
       >
-        TGet a sneak peek of AI-generated NEET questions for Chemistry, Physics,
+        Get a sneak peek of AI-generated NEET questions for Chemistry, Physics,
         and Biology. Start preparing for your exam with sample questions
         designed to help you excel.
       </Typography>

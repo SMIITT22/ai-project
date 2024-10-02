@@ -14,13 +14,13 @@ const HeroSection = () => {
     >
       <Typography
         variant="h1"
-        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-gloria text-black font-bold mb-10"
+        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins text-black font-bold mb-10"
       >
         Create Custom Exam Papers Instantly with AI!
       </Typography>
       <Typography
         variant="lead"
-        className="text-base sm:text-lg md:text-xl lg:text-2xl font-poppins text-black mb-10 max-w-3xl"
+        className="text-base sm:text-lg md:text-xl lg:text-2xl font-gloria text-black mb-10 max-w-3xl"
       >
         Currently focused on NEET, our platform helps you generate custom exam
         papers for Chemistry, Physics, and Biology with AI. More exams coming
