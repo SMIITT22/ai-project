@@ -1,6 +1,6 @@
 import { Typography, Button } from "@material-tailwind/react";
 import { BsStars } from "react-icons/bs";
-import { SiGnuprivacyguard } from "react-icons/si";
+import { IoIosLock } from "react-icons/io";
 
 const HeroSection = () => {
   return (
@@ -14,7 +14,7 @@ const HeroSection = () => {
     >
       <Typography
         variant="h1"
-        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins text-black font-bold mb-10"
+        className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-poppins text-black font-bold mb-10"
       >
         Create Custom Exam Papers Instantly with AI!
       </Typography>
@@ -42,7 +42,7 @@ const HeroSection = () => {
           className="transition-transform text-white font-poppins flex items-center justify-center gap-2 whitespace-nowrap w-full sm:w-auto md:min-w-[300px]"
         >
           Sign Up Now
-          <SiGnuprivacyguard size={24} />
+          <IoIosLock size={24} />
         </Button>
       </div>
     </div>

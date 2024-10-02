@@ -19,58 +19,82 @@ const SampleQuestionsSection = () => {
         designed to help you excel.
       </Typography>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-        <a
-          href="/chemistry-questions"
-          className="group flex flex-col items-center"
-        >
+        <div className="flex flex-col items-center">
           <img
             src={chemisteryGIF}
             alt="View Chemistry Questions"
-            className="w-24 h-24 object-contain mb-4 transform transition-transform group-hover:scale-105"
+            className="w-24 h-24 object-contain mb-4"
           />
-          <Typography variant="h6" className="font-poppins text-black">
-            Chemistry Questions
-          </Typography>
-        </a>
-        <a
-          href="/physics-questions"
-          className="group flex flex-col items-center"
-        >
+          <a href="/chemistry-questions" className="group">
+            <Typography
+              variant="h6"
+              className="font-poppins text-black underline hover:no-underline group-hover:text-green-500"
+              style={{
+                textDecorationThickness: "1.5px",
+                textUnderlineOffset: "3px",
+              }}
+            >
+              Chemistry Questions
+            </Typography>
+          </a>
+        </div>
+        <div className="flex flex-col items-center">
           <img
             src={physicsGIF}
             alt="View Physics Questions"
-            className="w-24 h-24 object-contain mb-4 transform transition-transform group-hover:scale-105"
+            className="w-24 h-24 object-contain mb-4"
           />
-          <Typography variant="h6" className="font-poppins text-black">
-            Physics Questions
-          </Typography>
-        </a>
-        <a
-          href="/biology-questions"
-          className="group flex flex-col items-center"
-        >
+          <a href="/physics-questions" className="group">
+            <Typography
+              variant="h6"
+              className="font-poppins text-black underline hover:no-underline group-hover:text-green-500"
+              style={{
+                textDecorationThickness: "1.5px",
+                textUnderlineOffset: "3px",
+              }}
+            >
+              Physics Questions
+            </Typography>
+          </a>
+        </div>
+        <div className="flex flex-col items-center">
           <img
             src={bioGIF}
             alt="View Biology Questions"
-            className="w-24 h-24 object-contain mb-4 transform transition-transform group-hover:scale-105"
+            className="w-24 h-24 object-contain mb-4"
           />
-          <Typography variant="h6" className="font-poppins text-black">
-            Biology Questions
-          </Typography>
-        </a>
-        <a
-          href="/full-neet-paper"
-          className="group col-span-1 flex flex-col items-center"
-        >
+          <a href="/biology-questions" className="group">
+            <Typography
+              variant="h6"
+              className="font-poppins text-black underline hover:no-underline group-hover:text-green-500"
+              style={{
+                textDecorationThickness: "1.5px",
+                textUnderlineOffset: "3px",
+              }}
+            >
+              Biology Questions
+            </Typography>
+          </a>
+        </div>
+        <div className="col-span-1 flex flex-col items-center">
           <img
             src={neetGIF}
             alt="View NEET Paper"
-            className="w-24 h-24 object-contain mb-4 transform transition-transform group-hover:scale-105"
+            className="w-24 h-24 object-contain mb-4"
           />
-          <Typography variant="h6" className="font-poppins text-black">
-            Full NEET Paper
-          </Typography>
-        </a>
+          <a href="/full-neet-paper" className="group">
+            <Typography
+              variant="h6"
+              className="font-poppins text-black underline hover:no-underline group-hover:text-green-500"
+              style={{
+                textDecorationThickness: "1.5px",
+                textUnderlineOffset: "3px",
+              }}
+            >
+              Full NEET Paper
+            </Typography>
+          </a>
+        </div>
       </div>
     </div>
   );

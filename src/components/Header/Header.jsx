@@ -10,7 +10,7 @@ const Header = () => {
             href="#"
             className="mr-4 cursor-pointer py-1.5 font-medium font-gloria"
           >
-            Question Generator
+            QG
           </Typography>
           <div className="flex items-center gap-4">
             <Button variant="outlined" size="sm" className="whitespace-nowrap">
