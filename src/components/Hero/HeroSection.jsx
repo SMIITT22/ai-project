@@ -20,7 +20,7 @@ const HeroSection = () => {
       </Typography>
       <Typography
         variant="lead"
-        className="text-base sm:text-lg md:text-xl lg:text-2xl font-gloria text-black mb-10 max-w-3xl"
+        className="text-base sm:text-lg md:text-xl lg:text-2xl font-gloria text-gray-700 mb-10 max-w-3xl"
       >
         Currently focused on NEET, our platform helps you generate custom exam
         papers for Chemistry, Physics, and Biology with AI. More exams coming

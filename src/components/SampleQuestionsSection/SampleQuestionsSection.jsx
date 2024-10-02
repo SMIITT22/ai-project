@@ -3,7 +3,7 @@ import { chemisteryGIF, physicsGIF, bioGIF, neetGIF } from "../../assets/index";
 
 const SampleQuestionsSection = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4 md:px-8 bg-white text-center lg:pt-20">
+    <div className="flex flex-col items-center justify-center px-4 md:px-8 bg-white text-center lg:pt-20 pb-10">
       <Typography
         variant="h2"
         className="text-2xl sm:text-3xl md:text-4xl font-poppins text-black font-bold mb-6"
@@ -12,7 +12,7 @@ const SampleQuestionsSection = () => {
       </Typography>
       <Typography
         variant="lead"
-        className="text-base sm:text-lg md:text-xl font-gloria text-black mb-10 max-w-3xl"
+        className="text-base sm:text-lg md:text-xl font-gloria text-gray-700 mb-10 max-w-3xl"
       >
         Get a sneak peek of AI-generated NEET questions for Chemistry, Physics,
         and Biology. Start preparing for your exam with sample questions
