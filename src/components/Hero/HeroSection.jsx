@@ -1,14 +1,18 @@
 import { Typography, Button } from "@material-tailwind/react";
 import { BsStars } from "react-icons/bs";
 import { IoIosLock } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
-const HeroSection = () => {
+// eslint-disable-next-line react/prop-types
+const HeroSection = ({ scrollToQuestions }) => {
+  const navigate = useNavigate();
+
   return (
     <div
       className="flex flex-col items-center justify-center min-h-[90vh] px-4 md:px-8 bg-white text-center -mt-8"
       style={{
         backgroundImage:
-          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='%23000000' fill-opacity='0.03'%3E%3Cpolygon fill-rule='evenodd' points='8 4 12 6 8 8 6 12 4 8 0 6 4 4 6 0 8 4'/%3E%3C/g%3E%3C/svg%3E\")",
+          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cg fill='%23000000' fill-opacity='0.03'%3E%3Cpolygon fill-rule='evenodd' points='8 4 12 6 8 8 6 12 4 8 0 6 4 4 6 0 8 4'/%3E%3C/g%3E%3C/svg%3E\")",
         backgroundColor: "#ffffff",
       }}
     >
@@ -31,6 +35,7 @@ const HeroSection = () => {
           variant="outlined"
           size="lg"
           className="transition-transform text-black bg-gray-300 border-gray-400 font-poppins flex items-center justify-center gap-2 whitespace-nowrap w-full sm:w-auto md:min-w-[300px]"
+          onClick={scrollToQuestions}
         >
           Explore NEET Questions
           <BsStars size={24} />
@@ -40,6 +45,7 @@ const HeroSection = () => {
           color="green"
           size="lg"
           className="transition-transform text-white font-poppins flex items-center justify-center gap-2 whitespace-nowrap w-full sm:w-auto md:min-w-[300px]"
+          onClick={() => navigate("/signup")} 
         >
           Sign Up Now
           <IoIosLock size={24} />

@@ -3,7 +3,10 @@ import { chemisteryGIF, physicsGIF, bioGIF, neetGIF } from "../../assets/index";
 
 const SampleQuestionsSection = () => {
   return (
-    <div className="flex flex-col items-center justify-center px-4 md:px-8 bg-white text-center lg:pt-20 pb-20">
+    <div
+      id="sample-questions-section"
+      className="flex flex-col items-center justify-center px-4 md:px-8 bg-white text-center lg:pt-20 pb-20"
+    >
       <Typography
         variant="h2"
         className="text-2xl sm:text-3xl md:text-4xl font-poppins text-black font-bold mb-6"

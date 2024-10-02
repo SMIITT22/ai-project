@@ -19,7 +19,7 @@ const QuestionsSection = () => {
           Discover why AI-generated NEET questions give you the best preparation
           edge.
         </Typography>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-8">
           {/* Card 1 */}
           <Card className="p-6 shadow-lg border border-gray-300 bg-white rounded-lg transform transition-all hover:scale-105 hover:shadow-2xl">
             <div className="mb-4">

@@ -8,7 +8,7 @@ const Footer = () => {
 
       <div className="container mx-auto px-4 md:px-8 pt-10">
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-start space-y-4 md:space-y-0">
-          <div className="flex items-center md:mr-6">
+          {/* <div className="flex items-center md:mr-6">
             <div className=" text-white p-3 rounded-full">
               <Typography
                 variant="h6"
@@ -17,7 +17,7 @@ const Footer = () => {
                 QG
               </Typography>
             </div>
-          </div>
+          </div> */}
 
           <div className="text-center md:text-left">
             <Typography

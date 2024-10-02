@@ -8,18 +8,22 @@ import Login from "./auth/Login/Login";
 import SignUp from "./auth/Signup/Signup";
 
 const App = () => {
+  const scrollToSampleQuestions = () => {
+    const section = document.getElementById("sample-questions-section");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <>
-      {/* Always render the Header */}
       <Header />
-
-      {/* Define the app routes */}
       <Routes>
         <Route
           path="/"
           element={
             <>
-              <HeroSection />
+              <HeroSection scrollToQuestions={scrollToSampleQuestions} />
               <SampleQuestionsSection />
               <QuestionsSection />
             </>
@@ -28,8 +32,6 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
       </Routes>
-
-      {/* Render Footer on all routes */}
       <Footer />
     </>
   );
