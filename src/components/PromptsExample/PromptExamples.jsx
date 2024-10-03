@@ -44,7 +44,7 @@ const PromptExamples = () => {
         onClick={handlePromptClick}
         className="border border-gray-300 p-3 rounded-md mr-1 cursor-pointer prompt-item"
       >
-        <Typography className="text-black font-poppins text-sm">
+        <Typography className="text-gray-700 font-poppins text-sm">
           {text}
         </Typography>
       </div>

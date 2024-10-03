@@ -25,7 +25,7 @@ const Footer = () => {
             >
               Questions Genrator
             </Typography>
-            <Typography variant="small" className="text-gray-500">
+            <Typography variant="small" className="text-gray-500 mt-1">
               Create Questions with AI, and do your practice.
             </Typography>
             <Typography variant="small" className="text-gray-500 mt-1">
