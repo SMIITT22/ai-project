@@ -1,7 +1,31 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { signupUser } from "../authSlice";
 import { Typography, Input, Button } from "@material-tailwind/react";
 import { FcGoogle } from "react-icons/fc";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSignup = async () => {
+    const userData = { email, password };
+    try {
+      const resultAction = await dispatch(signupUser(userData));
+
+      if (signupUser.fulfilled.match(resultAction)) {
+        navigate("/login");
+      } else {
+        console.error("Signup failed:", resultAction.error.message);
+      }
+    } catch (error) {
+      console.error("Signup failed:", error);
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-white px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md p-6 sm:p-8 rounded-lg shadow-lg bg-white border border-gray-300">
@@ -25,20 +49,24 @@ const SignUp = () => {
 
         <div className="mb-6">
           <Typography variant="small" className="text-black mb-1">
-            email
+            Email
           </Typography>
           <Input
             type="email"
             placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="mb-4 border border-gray-300"
           />
 
           <Typography variant="small" className="text-black mb-1 mt-2">
-            password
+            Password
           </Typography>
           <Input
             type="password"
             placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="mb-4 border border-gray-300"
           />
         </div>
@@ -46,6 +74,7 @@ const SignUp = () => {
         <Button
           fullWidth
           className="mb-4 bg-green-500 text-white rounded-md hover:bg-gray-800"
+          onClick={handleSignup}
         >
           Sign Up
         </Button>
