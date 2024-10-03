@@ -1,0 +1,47 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+*.env
+.env
+
+# FastAPI specific
+*.log
+
+# Pytest cache
+.cache/
+
+# VSCode specific files
+.vscode/
+
+# Jupyter Notebook checkpoints (if you're using them)
+.ipynb_checkpoints/
+
+# Mac specific files
+.DS_Store
+
+# Backup files
+*.bak
+*.swp
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Logs and debugging files
+*.log
+*.pid
+*.seed
+
+# Pipenv, poetry related files (if used)
+Pipfile
+Pipfile.lock
+
+# MyPy, Pylint, and other static analysis tools
+.mypy_cache/
+pylint-report.txt
+pylint.log
