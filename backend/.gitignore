@@ -37,7 +37,7 @@ htmlcov/
 *.pid
 *.seed
 
-# Pipenv, poetry related files (if used)
+# Ignore Pipenv, Poetry, and other dependency management files (if used)
 Pipfile
 Pipfile.lock
 
