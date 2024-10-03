@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
 import HeroSection from "./components/Hero/HeroSection";
-import SampleQuestionsSection from "./components/SampleQuestionsSection/SampleQuestionsSection";
+import PromptExamples from "./components/PromptsExample/PromptExamples";
+import SuggesionFlow from "./components/SuggesionFlow/SuggesionFlow";
 import QuestionsSection from "./components/QuestionsSection/QuestionsSection";
 import Footer from "./components/Footer/Footer";
 import Login from "./auth/Login/Login";
@@ -24,7 +25,8 @@ const App = () => {
           element={
             <>
               <HeroSection scrollToQuestions={scrollToSampleQuestions} />
-              <SampleQuestionsSection />
+              <PromptExamples />
+              <SuggesionFlow />
               <QuestionsSection />
             </>
           }

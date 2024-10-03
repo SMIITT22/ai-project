@@ -10,14 +10,14 @@ const QuestionsSection = () => {
           variant="h2"
           className="text-2xl sm:text-3xl md:text-4xl font-poppins text-black font-bold mb-6"
         >
-          Why Use AI-Generated NEET Practice Questions?
+          Why Use Our AI-Generated Question Platform?
         </Typography>
         <Typography
           variant="lead"
           className="text-base sm:text-lg md:text-xl text-center font-gloria text-gray-700 mb-10"
         >
-          Discover why AI-generated NEET questions give you the best preparation
-          edge.
+          See how we stand out when it comes to generating and downloading
+          custom question sets.
         </Typography>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-8">
           {/* Card 1 */}
@@ -27,15 +27,16 @@ const QuestionsSection = () => {
                 variant="h6"
                 className="text-lg font-semibold font-poppins text-black"
               >
-                Practice Real-Exam Questions
+                Generate Multiple Questions in One Go
               </Typography>
             </div>
             <Typography
               variant="paragraph"
               className="text-sm text-black font-poppins mb-4"
             >
-              Our AI generates questions similar to the actual NEET exam,
-              helping you prepare more effectively for the real challenge.
+              Unlike other platforms that limit how many questions you can
+              create at once, we let you generate as many questions as you need
+              with a single prompt. No limits, no restrictions.
             </Typography>
           </Card>
 
@@ -46,15 +47,16 @@ const QuestionsSection = () => {
                 variant="h6"
                 className="text-lg font-semibold font-poppins text-black"
               >
-                Get Fresh and Unique Questions Every Time
+                Instant PDF Download
               </Typography>
             </div>
             <Typography
               variant="paragraph"
               className="text-sm text-black font-poppins mb-4"
             >
-              Generate new and unique questions with every click. You&apos;ll
-              never run out of practice material.
+              Get all your generated questions in a clean, ready-to-use PDF
+              format instantly. No additional formatting required—just download
+              and start using.
             </Typography>
           </Card>
 
@@ -65,15 +67,16 @@ const QuestionsSection = () => {
                 variant="h6"
                 className="text-lg font-semibold font-poppins text-black"
               >
-                Simulate Full NEET Exam Papers
+                Tailored to Your Exact Needs
               </Typography>
             </div>
             <Typography
               variant="paragraph"
               className="text-sm text-black font-poppins mb-4"
             >
-              Create a full 180-question NEET exam paper and simulate the real
-              exam experience under timed conditions.
+              Whether you need exam questions or practice materials, our AI
+              creates custom questions based on your specific prompts, saving
+              you time and effort.
             </Typography>
           </Card>
 
@@ -84,15 +87,16 @@ const QuestionsSection = () => {
                 variant="h6"
                 className="text-lg font-semibold font-poppins text-black"
               >
-                Adapted for Your Needs
+                Always Fresh, Never Repeated
               </Typography>
             </div>
             <Typography
               variant="paragraph"
               className="text-sm text-black font-poppins mb-4"
             >
-              Our AI adapts to your study focus, generating questions based on
-              Chemistry, Physics, or Biology to match your preparation needs.
+              Each time you generate questions, our AI provides new, unique
+              content, ensuring you always have fresh material to work with,
+              without worrying about duplicates.
             </Typography>
           </Card>
         </div>
