@@ -1,6 +1,6 @@
 import { Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
-import "./PromptExamples.css"; // Import CSS for animations
+import "./PromptExamples.css";
 
 const PromptExamples = () => {
   const navigate = useNavigate();
@@ -27,7 +27,6 @@ const PromptExamples = () => {
     "Practice MCQs for Std 11th Chemistry",
   ];
 
-  // Function to handle click event and navigate to signup page
   const handlePromptClick = () => {
     navigate("/signup");
   };
@@ -42,8 +41,8 @@ const PromptExamples = () => {
     return contentArray.map((text, index) => (
       <div
         key={index}
-        onClick={handlePromptClick} // Add onClick event to redirect
-        className="border border-gray-300 p-3 rounded-md mr-1 cursor-pointer prompt-item" /* Add prompt-item class for click effect */
+        onClick={handlePromptClick}
+        className="border border-gray-300 p-3 rounded-md mr-1 cursor-pointer prompt-item"
       >
         <Typography className="text-black font-poppins text-sm">
           {text}
@@ -59,14 +58,12 @@ const PromptExamples = () => {
     >
       {/* Container with white-smoke background on left and right */}
       <div className="container mx-auto px-4 sm:px-8 flex flex-col items-center">
-        {/* Heading */}
         <Typography
           variant="h4"
           className="text-2xl sm:text-3xl md:text-4xl font-poppins text-black font-bold mb-6"
         >
           See examples
         </Typography>
-        {/* Subheading */}
         <Typography
           variant="lead"
           className="text-base sm:text-lg md:text-xl font-gloria text-gray-700 mb-10 max-w-3xl text-center"

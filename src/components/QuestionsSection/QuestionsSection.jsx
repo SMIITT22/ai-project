@@ -20,7 +20,6 @@ const QuestionsSection = () => {
           custom question sets.
         </Typography>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-8">
-          {/* Card 1 */}
           <Card className="p-6 shadow-lg border border-gray-300 bg-white rounded-lg transform transition-all hover:scale-105 hover:shadow-2xl">
             <div className="mb-4">
               <Typography
@@ -39,8 +38,6 @@ const QuestionsSection = () => {
               with a single prompt. No limits, no restrictions.
             </Typography>
           </Card>
-
-          {/* Card 2 */}
           <Card className="p-6 shadow-lg border border-gray-300 bg-white rounded-lg transform transition-all hover:scale-105 hover:shadow-2xl">
             <div className="mb-4">
               <Typography
@@ -59,8 +56,6 @@ const QuestionsSection = () => {
               and start using.
             </Typography>
           </Card>
-
-          {/* Card 3 */}
           <Card className="p-6 shadow-lg border border-gray-300 bg-white rounded-lg transform transition-all hover:scale-105 hover:shadow-2xl">
             <div className="mb-4">
               <Typography
@@ -79,8 +74,6 @@ const QuestionsSection = () => {
               you time and effort.
             </Typography>
           </Card>
-
-          {/* Card 4 */}
           <Card className="p-6 shadow-lg border border-gray-300 bg-white rounded-lg transform transition-all hover:scale-105 hover:shadow-2xl">
             <div className="mb-4">
               <Typography

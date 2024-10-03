@@ -18,7 +18,6 @@ const Footer = () => {
               </Typography>
             </div>
           </div> */}
-
           <div className="text-center md:text-left">
             <Typography
               variant="h6"

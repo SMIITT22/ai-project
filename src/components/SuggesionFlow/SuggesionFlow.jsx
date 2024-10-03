@@ -4,15 +4,12 @@ import { FaKeyboard, FaCog, FaFilePdf } from "react-icons/fa"; // Example icons 
 const SuggesionFlow = () => {
   return (
     <div className="flex flex-col items-center justify-center px-4 sm:px-10 md:px-16 lg:px-20 xl:px-32 bg-white text-center pt-20 pb-20">
-      {/* Heading */}
       <Typography
         variant="h2"
         className="text-2xl sm:text-3xl md:text-4xl font-poppins text-black font-bold mb-6"
       >
         How It Works: Generate Custom Questions with AI
       </Typography>
-
-      {/* Subheading */}
       <Typography
         variant="lead"
         className="text-base sm:text-lg md:text-xl font-gloria text-gray-700 mb-10 max-w-3xl"
@@ -22,9 +19,7 @@ const SuggesionFlow = () => {
         instantly.
       </Typography>
 
-      {/* Steps Section */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-6 lg:gap-8">
-        {/* Step 1 */}
         <div className="flex flex-col items-center">
           <FaKeyboard className="text-green-500 w-16 h-16 mb-4" />{" "}
           <Typography
@@ -38,16 +33,12 @@ const SuggesionFlow = () => {
             questions on electricity for Grade 10.&quot;
           </Typography>
         </div>
-
-        {/* Arrow between Step 1 and Step 2 - hidden on small screens */}
         <Typography
           variant="h2"
           className="hidden sm:block text-4xl lg:text-5xl font-gloria text-green-500"
         >
           →
         </Typography>
-
-        {/* Step 2 */}
         <div className="flex flex-col items-center">
           <FaCog className="text-green-500 w-16 h-16 mb-4" />{" "}
           <Typography
@@ -61,16 +52,12 @@ const SuggesionFlow = () => {
             generate as many questions as you need.
           </Typography>
         </div>
-
-        {/* Arrow between Step 2 and Step 3 - hidden on small screens */}
         <Typography
           variant="h2"
           className="hidden sm:block text-4xl lg:text-5xl font-gloria text-green-500"
         >
           →
         </Typography>
-
-        {/* Step 3 */}
         <div className="flex flex-col items-center">
           <FaFilePdf className="text-green-500 w-16 h-16 mb-4" />{" "}
           <Typography
