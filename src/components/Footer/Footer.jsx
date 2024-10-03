@@ -29,9 +29,6 @@ const Footer = () => {
               Create Questions with AI, and do your practice.
             </Typography>
             <Typography variant="small" className="text-gray-500 mt-1">
-              71-75, Shelton Street, Covent Garden, London, WC2H 9JQ, UK
-            </Typography>
-            <Typography variant="small" className="text-gray-500 mt-1">
               © 2024 QG AI – All rights reserved.
             </Typography>
           </div>
