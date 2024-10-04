@@ -1,6 +1,6 @@
 import { Typography, Button } from "@material-tailwind/react";
 import { BsStars } from "react-icons/bs";
-import { MdOutlineAttachMoney } from "react-icons/md";
+import { RiMoneyRupeeCircleFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
 const HeroSectionUser = () => {
@@ -40,7 +40,7 @@ const HeroSectionUser = () => {
           onClick={() => navigate("/pricing")}
         >
           View Pricing/Upgrade
-          <MdOutlineAttachMoney size={24} />
+          <RiMoneyRupeeCircleFill size={24} />
         </Button>
       </div>
     </>

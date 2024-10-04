@@ -8,15 +8,13 @@ import {
 } from "@material-tailwind/react";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../../auth/authSlice";
-import {
-  FaUserCircle,
-  FaLifeRing,
-  FaPowerOff,
-  FaQuestionCircle,
-  FaDollarSign,
-  FaCogs,
-} from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { BsStars } from "react-icons/bs";
+import { IoSettingsSharp } from "react-icons/io5";
+import { RiMoneyRupeeCircleFill } from "react-icons/ri";
+import { BiSupport } from "react-icons/bi";
+import { FaSignOutAlt } from "react-icons/fa";
 
 const ProfileMenu = ({ userEmail }) => {
   const [open, setOpen] = useState(false);
@@ -58,7 +56,7 @@ const ProfileMenu = ({ userEmail }) => {
               navigate("/generate-questions");
             }}
           >
-            <FaQuestionCircle className="w-4 h-4 text-gray-800" />
+            <BsStars className="w-4 h-4 text-gray-800" />
             <Typography className="ml-2 text-gray-800 text-sm font-medium">
               Generate Questions
             </Typography>
@@ -70,7 +68,7 @@ const ProfileMenu = ({ userEmail }) => {
               navigate("/pricing");
             }}
           >
-            <FaDollarSign className="w-4 h-4 text-gray-800" />
+            <RiMoneyRupeeCircleFill className="w-4 h-4 text-gray-800" />
             <Typography className="ml-2 text-gray-800 text-sm font-medium">
               Pricing
             </Typography>
@@ -82,7 +80,7 @@ const ProfileMenu = ({ userEmail }) => {
               navigate("/settings");
             }}
           >
-            <FaCogs className="w-4 h-4 text-gray-800" />
+            <IoSettingsSharp className="w-4 h-4 text-gray-800" />
             <Typography className="ml-2 text-gray-800 text-sm font-medium">
               Settings
             </Typography>
@@ -94,7 +92,7 @@ const ProfileMenu = ({ userEmail }) => {
               navigate("/support");
             }}
           >
-            <FaLifeRing className="w-4 h-4 text-gray-800" />
+            <BiSupport className="w-4 h-4 text-gray-800" />
             <Typography className="ml-2 text-gray-800 text-sm font-medium">
               Support
             </Typography>
@@ -104,7 +102,7 @@ const ProfileMenu = ({ userEmail }) => {
             className="flex items-center p-2 transition-all hover:bg-slate-100"
             onClick={handleLogout}
           >
-            <FaPowerOff className="w-4 h-4 text-gray-800" />
+            <FaSignOutAlt className="w-4 h-4 text-gray-800" />
             <Typography className="ml-2 text-gray-800 text-sm font-medium">
               Sign Out
             </Typography>
