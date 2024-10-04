@@ -12,14 +12,15 @@ const HeroSectionUser = () => {
         variant="h1"
         className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-poppins text-black font-bold mb-10"
       >
-        Ready to Generate More Questions?
+        Welcome Back! Ready to Generate Questions?
       </Typography>
       <Typography
         variant="lead"
         className="text-base sm:text-lg md:text-xl lg:text-2xl font-gloria text-gray-700 mb-10 max-w-3xl"
       >
-        Use AI to create custom question sets in seconds. Start by entering a
-        prompt below.
+        You can create a limited number of personalized questions with your
+        current plan. To generate more questions, consider upgrading your
+        subscription for more access!
       </Typography>
       <div className="flex flex-col sm:flex-row gap-4">
         <Button

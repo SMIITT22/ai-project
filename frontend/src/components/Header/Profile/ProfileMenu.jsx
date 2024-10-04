@@ -47,9 +47,10 @@ const ProfileMenu = ({ userEmail }) => {
           </button>
         </MenuHandler>
         <MenuList className="absolute z-10 min-w-[150px] max-w-[200px] overflow-auto rounded-md border border-gray-300 bg-white p-1 shadow-md focus:outline-none">
-          <Typography className="p-2 text-gray-800 text-sm font-medium border-b border-gray-300 cursor-default">
+          <Typography className="p-2 text-gray-800 text-sm font-medium cursor-default">
             {truncatedEmail}
           </Typography>
+          <hr className="my-1 border-gray-300" />
           <MenuItem
             className="flex items-center p-2 transition-all hover:bg-slate-100"
             onClick={() => {

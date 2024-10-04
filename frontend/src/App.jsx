@@ -16,8 +16,9 @@ import PublicRoute from "./auth/PublicRoute";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkUserStatus } from "./auth/authSlice";
-import { selectIsAuthenticated, selectLoading } from "./auth/authSlice"; 
+import { selectIsAuthenticated, selectLoading } from "./auth/authSlice";
 import LoadingScreen from "./common/LoadingScreen";
+import { useLocation } from "react-router-dom";
 
 const App = () => {
   const scrollToSampleQuestions = () => {
@@ -30,10 +31,15 @@ const App = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const loading = useSelector(selectLoading);
+  const location = useLocation();
 
   useEffect(() => {
     dispatch(checkUserStatus());
   }, [dispatch]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   if (loading) {
     return <LoadingScreen message="Loading..." />;
