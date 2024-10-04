@@ -8,6 +8,10 @@ import Footer from "./components/Footer/Footer";
 import Login from "./auth/Login/Login";
 import SignUp from "./auth/Signup/Signup";
 
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { checkUserStatus } from "./auth/authSlice";
+
 const App = () => {
   const scrollToSampleQuestions = () => {
     const section = document.getElementById("sample-questions-section");
@@ -15,6 +19,11 @@ const App = () => {
       section.scrollIntoView({ behavior: "smooth" });
     }
   };
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(checkUserStatus());
+  }, [dispatch]);
 
   return (
     <>

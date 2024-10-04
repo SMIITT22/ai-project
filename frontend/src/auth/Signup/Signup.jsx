@@ -17,7 +17,7 @@ const SignUp = () => {
       const resultAction = await dispatch(signupUser(userData));
 
       if (signupUser.fulfilled.match(resultAction)) {
-        navigate("/login");
+        navigate("/");
       } else {
         console.error("Signup failed:", resultAction.error.message);
       }

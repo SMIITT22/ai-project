@@ -1,7 +1,29 @@
 import { Typography, Input, Button } from "@material-tailwind/react";
 import { FcGoogle } from "react-icons/fc";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../auth/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { loading, error } = useSelector((state) => state.auth);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+    dispatch(loginUser({ email, password }))
+      .unwrap()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((err) => {
+        console.error("Login failed:", err);
+      });
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-white px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md p-6 sm:p-8 rounded-lg shadow-lg bg-white border border-gray-300">
@@ -31,6 +53,8 @@ const Login = () => {
             type="email"
             placeholder="Enter your email"
             className="mb-4 border border-gray-300"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <div className="flex justify-between items-center mb-1 mt-2">
@@ -48,14 +72,24 @@ const Login = () => {
             type="password"
             placeholder="Enter your password"
             className="mb-6 border border-gray-300"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+
+        {error && (
+          <Typography className="text-center text-red-500 mb-4">
+            {error}
+          </Typography>
+        )}
 
         <Button
           fullWidth
           className="mb-4 bg-green-500 text-white rounded-md hover:bg-gray-800"
+          onClick={handleLogin}
+          disabled={loading}
         >
-          login
+          {loading ? "Logging in..." : "Login"}
         </Button>
 
         <div className="flex justify-center items-center mb-6">
