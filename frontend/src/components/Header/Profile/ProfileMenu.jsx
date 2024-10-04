@@ -46,8 +46,8 @@ const ProfileMenu = ({ userEmail }) => {
             <FaUserCircle className="w-8 h-8 text-gray-800" />
           </button>
         </MenuHandler>
-        <MenuList className="absolute z-10 min-w-[150px] max-w-[200px] overflow-auto rounded-md border border-slate-200 bg-white p-1 shadow-md focus:outline-none">
-          <Typography className="p-2 text-gray-800 text-sm font-medium border-b border-slate-200">
+        <MenuList className="absolute z-10 min-w-[150px] max-w-[200px] overflow-auto rounded-md border border-gray-300 bg-white p-1 shadow-md focus:outline-none">
+          <Typography className="p-2 text-gray-800 text-sm font-medium border-b border-gray-300 cursor-default">
             {truncatedEmail}
           </Typography>
           <MenuItem
@@ -98,7 +98,7 @@ const ProfileMenu = ({ userEmail }) => {
               Support
             </Typography>
           </MenuItem>
-          <hr className="my-1 border-slate-200" />
+          <hr className="my-1 border-gray-300" />
           <MenuItem
             className="flex items-center p-2 transition-all hover:bg-slate-100"
             onClick={handleLogout}

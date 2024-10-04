@@ -151,6 +151,7 @@ export const selectIsAuthenticated = createSelector(
   (user) => user !== null
 );
 export const selectLoading = (state) => state.auth.loading;
+export const selectUser = (state) => state.auth.user;
 
 export const { logout } = authSlice.actions;
 export default authSlice.reducer;

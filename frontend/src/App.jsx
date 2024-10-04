@@ -14,8 +14,10 @@ import Support from "./components/ProfileMenuItems/Support/Support";
 import PrivateRoute from "./auth/PrivateRoute";
 import PublicRoute from "./auth/PublicRoute";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { checkUserStatus } from "./auth/authSlice";
+import { selectIsAuthenticated, selectLoading } from "./auth/authSlice"; 
+import LoadingScreen from "./common/LoadingScreen";
 
 const App = () => {
   const scrollToSampleQuestions = () => {
@@ -26,10 +28,16 @@ const App = () => {
   };
 
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const loading = useSelector(selectLoading);
 
   useEffect(() => {
     dispatch(checkUserStatus());
   }, [dispatch]);
+
+  if (loading) {
+    return <LoadingScreen message="Loading..." />;
+  }
 
   return (
     <>
@@ -41,8 +49,8 @@ const App = () => {
             <>
               <HeroSection scrollToQuestions={scrollToSampleQuestions} />
               <PromptExamples />
-              <SuggesionFlow />
-              <QuestionsSection />
+              {!isAuthenticated && <SuggesionFlow />}
+              {!isAuthenticated && <QuestionsSection />}
             </>
           }
         />

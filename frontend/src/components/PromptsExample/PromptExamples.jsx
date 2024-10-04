@@ -1,16 +1,19 @@
 import { Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectIsAuthenticated } from "../../auth/authSlice";
 import "./PromptExamples.css";
 
 const PromptExamples = () => {
   const navigate = useNavigate();
+  const isAuthenticated = useSelector(selectIsAuthenticated);
 
   const row1Content = [
     "Create a full NEET paper",
     "90 Physics questions for Class 12th",
     "Std 8th Biology questions without options",
     "45 Chemistry MCQs from Std 11th syllabus",
-    "Physics MCQs with for Std 10th",
+    "Physics MCQs for Std 10th",
   ];
 
   const row2Content = [
@@ -28,7 +31,11 @@ const PromptExamples = () => {
   ];
 
   const handlePromptClick = () => {
-    navigate("/signup");
+    if (isAuthenticated) {
+      navigate("/generate-questions");
+    } else {
+      navigate("/signup");
+    }
   };
 
   // Function to duplicate content to prevent gaps
@@ -41,7 +48,7 @@ const PromptExamples = () => {
     return contentArray.map((text, index) => (
       <div
         key={index}
-        onClick={handlePromptClick}
+        onClick={() => handlePromptClick(text)}
         className="border border-gray-300 p-3 rounded-md mr-1 cursor-pointer prompt-item"
       >
         <Typography className="text-gray-700 font-poppins text-sm">
@@ -56,7 +63,6 @@ const PromptExamples = () => {
       id="sample-questions-section"
       className="flex flex-col items-center justify-center px-4 sm:px-10 md:px-16 lg:px-20 xl:px-32 bg-white text-center pt-20 pb-10"
     >
-      {/* Container with white-smoke background on left and right */}
       <div className="container mx-auto px-4 sm:px-8 flex flex-col items-center">
         <Typography
           variant="h4"

@@ -1,13 +1,21 @@
-import { Navbar, Typography, Button } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Navbar, Typography } from "@material-tailwind/react";
 import { useSelector } from "react-redux";
 import ProfileMenu from "./Profile/ProfileMenu";
+import AuthButtons from "./AuthButtons/AuthButtons";
+import LoadingScreen from "../../common/LoadingScreen";
+import {
+  selectIsAuthenticated,
+  selectLoading,
+  selectUser,
+} from "../../auth/authSlice"; 
 
 const Header = () => {
-  const { user, loading } = useSelector((state) => state.auth);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const loading = useSelector(selectLoading);
+  const user = useSelector(selectUser); 
 
   if (loading) {
-    return null;
+    return <LoadingScreen message="Loading..." />;
   }
 
   return (
@@ -22,30 +30,10 @@ const Header = () => {
             QG
           </Typography>
           <div className="flex items-center gap-4">
-            {user ? (
+            {isAuthenticated ? (
               <ProfileMenu userEmail={user.email} />
             ) : (
-              <>
-                <Link to="/login">
-                  <Button
-                    variant="text"
-                    size="sm"
-                    className="whitespace-nowrap bg-gray-300"
-                  >
-                    <span>Log In</span>
-                  </Button>
-                </Link>
-                <Link to="/signup">
-                  <Button
-                    variant="gradient"
-                    size="sm"
-                    color="green"
-                    className="whitespace-nowrap"
-                  >
-                    <span>Sign Up</span>
-                  </Button>
-                </Link>
-              </>
+              <AuthButtons />
             )}
           </div>
         </div>
