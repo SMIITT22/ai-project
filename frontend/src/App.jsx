@@ -7,7 +7,12 @@ import QuestionsSection from "./components/QuestionsSection/QuestionsSection";
 import Footer from "./components/Footer/Footer";
 import Login from "./auth/Login/Login";
 import SignUp from "./auth/Signup/Signup";
-
+import GenerateQuestions from "./components/ProfileMenuItems/GenrateQuestionsPage/GenrateQuestions";
+import Pricing from "./components/ProfileMenuItems/Pricing/Pricing";
+import Settings from "./components/ProfileMenuItems/Settings/Settings";
+import Support from "./components/ProfileMenuItems/Support/Support";
+import PrivateRoute from "./auth/PrivateRoute";
+import PublicRoute from "./auth/PublicRoute";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { checkUserStatus } from "./auth/authSlice";
@@ -19,6 +24,7 @@ const App = () => {
       section.scrollIntoView({ behavior: "smooth" });
     }
   };
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,8 +46,54 @@ const App = () => {
             </>
           }
         />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <PublicRoute>
+              <SignUp />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/generate-questions"
+          element={
+            <PrivateRoute>
+              <GenerateQuestions />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/pricing"
+          element={
+            <PrivateRoute>
+              <Pricing />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <PrivateRoute>
+              <Settings />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/support"
+          element={
+            <PrivateRoute>
+              <Support />
+            </PrivateRoute>
+          }
+        />
       </Routes>
       <Footer />
     </>

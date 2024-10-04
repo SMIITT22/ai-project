@@ -1,10 +1,14 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createAsyncThunk,
+  createSelector,
+} from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
   user: null,
   status: "idle", // 'idle' | 'loading' | 'succeeded' | 'failed'
-  loading: true, 
+  loading: true,
   error: null,
 };
 
@@ -141,6 +145,12 @@ const authSlice = createSlice({
       });
   },
 });
+
+export const selectIsAuthenticated = createSelector(
+  (state) => state.auth.user,
+  (user) => user !== null
+);
+export const selectLoading = (state) => state.auth.loading;
 
 export const { logout } = authSlice.actions;
 export default authSlice.reducer;
