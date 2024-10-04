@@ -1,15 +1,10 @@
 import { Navbar, Typography, Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../../auth/authSlice";
+import { useSelector } from "react-redux";
+import ProfileMenu from "./Profile/ProfileMenu";
 
 const Header = () => {
   const { user, loading } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    dispatch(logoutUser());
-  };
 
   if (loading) {
     return null;
@@ -28,19 +23,7 @@ const Header = () => {
           </Typography>
           <div className="flex items-center gap-4">
             {user ? (
-              <>
-                <Typography className="font-medium">
-                  Welcome, {user.email}
-                </Typography>
-                <Button
-                  variant="text"
-                  size="sm"
-                  className="whitespace-nowrap bg-red-300"
-                  onClick={handleLogout}
-                >
-                  <span>Log Out</span>
-                </Button>
-              </>
+              <ProfileMenu userEmail={user.email} />
             ) : (
               <>
                 <Link to="/login">

@@ -1,5 +1,5 @@
 import { Typography } from "@material-tailwind/react";
-import { FaKeyboard, FaCog, FaFilePdf } from "react-icons/fa"; // Example icons for the steps
+import { FaKeyboard, FaCog, FaFilePdf } from "react-icons/fa";
 
 const SuggesionFlow = () => {
   return (

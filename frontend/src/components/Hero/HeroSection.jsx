@@ -3,7 +3,6 @@ import { BsStars } from "react-icons/bs";
 import { IoIosLock } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
-// eslint-disable-next-line react/prop-types
 const HeroSection = ({ scrollToQuestions }) => {
   const navigate = useNavigate();
 
