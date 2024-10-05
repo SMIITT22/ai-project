@@ -7,7 +7,7 @@ import QuestionsSection from "./components/QuestionsSection/QuestionsSection";
 import Footer from "./components/Footer/Footer";
 import Login from "./auth/Login/Login";
 import SignUp from "./auth/Signup/Signup";
-import GenerateQuestions from "./components/ProfileMenuItems/GenrateQuestionsPage/GenrateQuestions";
+import GenerateQuestions from "./components/ProfileMenuItems/GenerateQuestionsPage/GenerateQuestions";
 import Pricing from "./components/ProfileMenuItems/Pricing/Pricing";
 import Settings from "./components/ProfileMenuItems/Settings/Settings";
 import Support from "./components/ProfileMenuItems/Support/Support";
@@ -57,6 +57,7 @@ const App = () => {
               <PromptExamples />
               {!isAuthenticated && <SuggesionFlow />}
               {!isAuthenticated && <QuestionsSection />}
+              <Footer />
             </>
           }
         />
@@ -109,7 +110,6 @@ const App = () => {
           }
         />
       </Routes>
-      <Footer />
     </>
   );
 };
