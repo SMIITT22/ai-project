@@ -46,8 +46,8 @@ const Login = () => {
         </div>
 
         <div className="mb-6">
-          <Typography variant="small" className="text-black mb-1">
-            email
+          <Typography variant="small" className="text-black font-poppins mb-1">
+            Email
           </Typography>
           <Input
             type="email"
@@ -57,13 +57,13 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <div className="flex justify-between items-center mb-1 mt-2">
+          <div className="flex justify-between items-center font-poppins mb-1 mt-2">
             <Typography variant="small" className="text-black">
-              password
+              Password
             </Typography>
             <a
               href="/forgot-password"
-              className="text-sm text-green-500 hover:underline"
+              className="text-sm text-black font-poppins hover:underline"
             >
               forget password?
             </a>
@@ -85,7 +85,7 @@ const Login = () => {
 
         <Button
           fullWidth
-          className="mb-4 bg-green-500 text-white rounded-md hover:bg-gray-800"
+          className="mb-4 bg-black text-white rounded-md hover:bg-gray-800"
           onClick={handleLogin}
           disabled={loading}
         >
@@ -93,9 +93,12 @@ const Login = () => {
         </Button>
 
         <div className="flex justify-center items-center mb-6">
-          <Typography className="text-gray-600 text-sm">
+          <Typography className="text-gray-600 text-sm font-poppins">
             Don’t have an account?{" "}
-            <a href="/signup" className="text-green-500 hover:underline">
+            <a
+              href="/signup"
+              className="text-black hover:underline font-poppins"
+            >
               Sign up
             </a>
           </Typography>
@@ -109,14 +112,20 @@ const Login = () => {
           <FcGoogle className="h-4 w-4" /> sign in with Google
         </Button>
 
-        <Typography variant="small" className="text-center text-gray-500">
+        <Typography
+          variant="small"
+          className="text-center text-gray-500 font-poppins"
+        >
           By continuing, you acknowledge that you have read and understood, and
           agree to QG-Questions Generator AI’s{" "}
-          <a href="/terms" className="text-green-500 hover:underline">
+          <a href="/terms" className="text-black hover:underline font-poppins">
             Terms of Service
           </a>{" "}
           and{" "}
-          <a href="/privacy" className="text-green-500 hover:underline">
+          <a
+            href="/privacy"
+            className="text-black hover:underline font-poppins"
+          >
             Privacy Policy
           </a>
           .

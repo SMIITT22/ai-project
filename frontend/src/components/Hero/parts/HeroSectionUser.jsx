@@ -77,7 +77,7 @@ const InputSection = ({ onGenerate }) => {
         ].map((suggestion, index) => (
           <button
             key={index}
-            className="rounded-full border border-gray-300 text-xs sm:text-sm md:text-base text-gray-700 px-3 py-1 bg-white hover:text-white hover:bg-black hover:border-black transition duration-200 ease-in-out shadow-sm whitespace-nowrap"
+            className="rounded-full border font-poppins border-gray-300 text-xs sm:text-sm md:text-base text-gray-700 px-3 py-1 bg-white hover:text-white hover:bg-black hover:border-black transition duration-200 ease-in-out shadow-sm whitespace-nowrap"
             onClick={() => setPrompt(suggestion)}
           >
             {suggestion}
@@ -101,7 +101,7 @@ const GeneratedOutput = ({ loading, generatedOutput, prompt }) => {
         {loading ? (
           <div className="animate-pulse">
             {/* Skeleton for Header */}
-            <div className="bg-gray-300 rounded-t-lg border-b border-gray-500 p-4 sm:p-6 flex justify-between items-center">
+            <div className="bg-gray-300 rounded-t-lg border-b border-gray-500 p-2 flex justify-between items-center">
               <div className="h-6 bg-gray-400 rounded-full w-1/2"></div>
               <div className="h-6 bg-gray-400 rounded-full w-8"></div>
             </div>

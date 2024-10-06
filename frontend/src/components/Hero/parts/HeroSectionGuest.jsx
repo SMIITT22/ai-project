@@ -34,7 +34,7 @@ const HeroSectionGuest = ({ scrollToQuestions }) => {
         </Button>
         <Button
           variant="gradient"
-          color="green"
+          color="black"
           size="lg"
           className="transition-transform text-white font-poppins flex items-center justify-center gap-2 whitespace-nowrap w-full sm:w-auto md:min-w-[250px] lg:min-w-[300px] py-3"
           onClick={() => navigate("/signup")}

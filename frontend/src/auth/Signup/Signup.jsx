@@ -40,7 +40,7 @@ const SignUp = () => {
             Signup to Questions Generator
           </Typography>
 
-          <Typography className="text-center text-gray-500 text-sm">
+          <Typography className="text-center text-gray-500 text-sm font-poppins">
             Fast, easy, and full exam paper generation for your needs.
           </Typography>
 
@@ -48,7 +48,7 @@ const SignUp = () => {
         </div>
 
         <div className="mb-6">
-          <Typography variant="small" className="text-black mb-1">
+          <Typography variant="small" className="text-black mb-1 font-poppins">
             Email
           </Typography>
           <Input
@@ -59,7 +59,7 @@ const SignUp = () => {
             className="mb-4 border border-gray-300"
           />
 
-          <Typography variant="small" className="text-black mb-1 mt-2">
+          <Typography variant="small" className="text-black mb-1 mt-2 font-poppins">
             Password
           </Typography>
           <Input
@@ -73,16 +73,16 @@ const SignUp = () => {
 
         <Button
           fullWidth
-          className="mb-4 bg-green-500 text-white rounded-md hover:bg-gray-800"
+          className="mb-4 bg-black text-white rounded-md hover:bg-gray-800"
           onClick={handleSignup}
         >
           Sign Up
         </Button>
 
         <div className="flex justify-center items-center mb-6">
-          <Typography className="text-gray-600 text-sm">
+          <Typography className="text-gray-600 text-sm font-poppins">
             Already have an account?{" "}
-            <a href="/login" className="text-green-500 hover:underline">
+            <a href="/login" className="text-black hover:underline font-poppins">
               Sign in
             </a>
           </Typography>
@@ -91,19 +91,19 @@ const SignUp = () => {
         <Button
           variant="outlined"
           fullWidth
-          className="mb-6 border-black text-black hover:bg-gray-100 flex items-center justify-center gap-2"
+          className="mb-6 border-black text-black hover:bg-gray-100 flex items-center justify-center gap-2 font-poppins"
         >
           <FcGoogle className="h-4 w-4" /> Sign up with Google
         </Button>
 
-        <Typography variant="small" className="text-center text-gray-500">
+        <Typography variant="small" className="text-center text-gray-500 font-poppins">
           By continuing, you acknowledge that you have read and understood, and
           agree to QG-Questions Generator AI’s{" "}
-          <a href="/terms" className="text-green-500 hover:underline">
+          <a href="/terms" className="text-black hover:underline font-poppins">
             Terms of Service
           </a>{" "}
           and{" "}
-          <a href="/privacy" className="text-green-500 hover:underline">
+          <a href="/privacy" className="text-black hover:underline font-poppins">
             Privacy Policy
           </a>
           .

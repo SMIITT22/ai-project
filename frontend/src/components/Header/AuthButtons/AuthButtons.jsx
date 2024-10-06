@@ -17,7 +17,7 @@ const AuthButtons = () => {
         <Button
           variant="gradient"
           size="sm"
-          color="green"
+          color="black"
           className="whitespace-nowrap"
         >
           <span>Sign Up</span>
