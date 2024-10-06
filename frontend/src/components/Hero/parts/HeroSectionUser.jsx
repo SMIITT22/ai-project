@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Typography } from "@material-tailwind/react";
-import { AiOutlineArrowRight, AiOutlineDownload } from "react-icons/ai";
+import {
+  Typography,
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+  Button,
+} from "@material-tailwind/react";
+import { AiOutlineArrowRight, AiOutlineMore } from "react-icons/ai";
 import { FaSpinner } from "react-icons/fa";
 
 // Heading Component
@@ -81,56 +88,73 @@ const InputSection = ({ onGenerate }) => {
   );
 };
 
-// Generated Output Component
-const GeneratedOutput = ({ loading, generatedOutput, prompt }) => (
-  <div
-    className={`max-w-full sm:max-w-3xl mx-auto mt-8 mb-8 transition-all duration-500 ease-in-out`}
-  >
-    <div className="border border-white rounded-lg p-1 bg-black">
-      {loading ? (
-        <div className="animate-pulse">
-          <div className="bg-gray-800 rounded-t-lg border-b border-white p-2 sm:p-4 flex justify-between items-center">
-            <div className="h-6 bg-gray-600 rounded-full w-1/2"></div>
-            <div className="h-6 bg-gray-600 rounded-full w-8"></div>
-          </div>
-          <div className="bg-gray-700 rounded-b-lg h-64 sm:h-80 md:h-96 p-4">
-            <div className="h-6 bg-gray-600 rounded-full w-1/2 mb-4"></div>
-            <div className="space-y-3">
-              <div className="h-4 bg-gray-600 rounded w-full"></div>
-              <div className="h-4 bg-gray-600 rounded w-full"></div>
-              <div className="h-4 bg-gray-600 rounded w-3/4"></div>
-              <div className="h-4 bg-gray-600 rounded w-full"></div>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <>
-          <div className="bg-gray-900 rounded-t-lg border-b border-gray-500">
-            <div className="flex justify-between items-center p-2 sm:p-4 font-poppins rounded-t-lg">
-              <span className="text-sm sm:text-base font-semibold flex-grow text-white whitespace-nowrap overflow-hidden text-ellipsis">
-                {prompt}
-              </span>
-              <button
-                onClick={() => console.log("Download triggered")}
-                className="flex-none"
-              >
-                <AiOutlineDownload className="h-5 w-5 sm:h-6 sm:w-6 text-gray-400 hover:text-blue-500 transition duration-200" />
-              </button>
-            </div>
-          </div>
+const GeneratedOutput = ({ loading, generatedOutput, prompt }) => {
+  const handleDownloadPDF = () => {
+    console.log("Download as PDF triggered");
+  };
 
-          <div className="bg-gray-800 rounded-b-lg h-64 sm:h-80 md:h-96 flex flex-col p-4">
-            <div className="overflow-auto flex-grow max-h-full">
-              <pre className="text-gray-200 whitespace-pre-wrap font-poppins text-sm sm:text-base">
-                {generatedOutput}
-              </pre>
+  return (
+    <div
+      className={`max-w-full lg:max-w-4xl xl:max-w-5xl mx-auto mt-8 mb-8 transition-all duration-500 ease-in-out`}
+    >
+      <div className="border border-gray-500 rounded-lg bg-white">
+        {loading ? (
+          <div className="animate-pulse">
+            {/* Skeleton for Header */}
+            <div className="bg-gray-300 rounded-t-lg border-b border-gray-500 p-4 sm:p-6 flex justify-between items-center">
+              <div className="h-6 bg-gray-400 rounded-full w-1/2"></div>
+              <div className="h-6 bg-gray-400 rounded-full w-8"></div>
+            </div>
+            {/* Skeleton for Content */}
+            <div className="bg-gray-200 rounded-b-lg h-80 sm:h-96 lg:h-[30rem] xl:h-[36rem] p-6">
+              <div className="h-6 bg-gray-400 rounded-full w-1/2 mb-4"></div>
+              <div className="space-y-3">
+                <div className="h-4 bg-gray-400 rounded w-full"></div>
+                <div className="h-4 bg-gray-400 rounded w-full"></div>
+                <div className="h-4 bg-gray-400 rounded w-3/4"></div>
+                <div className="h-4 bg-gray-400 rounded w-full"></div>
+              </div>
             </div>
           </div>
-        </>
-      )}
+        ) : (
+          <>
+            <div className="bg-gray-300 rounded-t-lg border-b border-gray-500">
+              <div className="flex justify-between items-center p-2 px-3 font-poppins rounded-t-lg">
+                <span className="text-xs sm:text-sm md:text-base flex-grow text-black whitespace-nowrap overflow-hidden text-ellipsis">
+                  {prompt}
+                </span>
+                <Menu>
+                  <MenuHandler>
+                    <Button variant="text" className="flex-none text-black p-1">
+                      <AiOutlineMore className="h-6 w-6" />
+                    </Button>
+                  </MenuHandler>
+                  <MenuList className="p-0 bg-white border border-gray-50 w-32 sm:w-40 lg:w-56">
+                    <MenuItem
+                      onClick={handleDownloadPDF}
+                      className="bg-white text-black text-xs sm:text-sm lg:text-base font-poppins px-1 sm:px-4 lg:px-6 p-2 sm:py-2 lg:py-3"
+                    >
+                      Download as PDF
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              </div>
+            </div>
+
+            <div className="bg-gray-200 rounded-b-lg h-80 sm:h-96 lg:h-[30rem] xl:h-[36rem] flex flex-col px-3 py-2">
+              <div className="overflow-auto flex-grow max-h-full">
+                <pre className="text-black whitespace-pre-wrap font-poppins text-xs sm:text-sm md:text-base">
+                  {generatedOutput}
+                </pre>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
+};
+
 // Main Component
 const HeroSectionUser = () => {
   const [generatedOutput, setGeneratedOutput] = useState("");
