@@ -53,12 +53,12 @@ const ProfileMenu = ({ userEmail }) => {
             className="flex items-center p-2 transition-all hover:bg-slate-100"
             onClick={() => {
               setOpen(false);
-              navigate("/generate-questions");
+              navigate("/generations");
             }}
           >
             <BsStars className="w-4 h-4 text-gray-800" />
             <Typography className="ml-2 text-gray-800 text-sm font-medium">
-              Generate Questions
+              Generations
             </Typography>
           </MenuItem>
           <MenuItem

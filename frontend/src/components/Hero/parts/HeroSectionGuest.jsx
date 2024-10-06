@@ -7,26 +7,26 @@ const HeroSectionGuest = ({ scrollToQuestions }) => {
   const navigate = useNavigate();
 
   return (
-    <>
+    <div className="flex flex-col items-center px-4 sm:px-6 md:px-8 lg:px-10">
       <Typography
         variant="h1"
-        className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-poppins text-black font-bold mb-10"
+        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-poppins text-black font-bold mb-5 text-center"
       >
         Generate Custom Question Sets Instantly with AI!
       </Typography>
       <Typography
         variant="lead"
-        className="text-base sm:text-lg md:text-xl lg:text-2xl font-gloria text-gray-700 mb-10 max-w-3xl"
+        className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-gloria text-gray-700 mb-8 max-w-3xl text-center"
       >
         For teachers creating exams or students practicing, our AI generates
         personalized questions for any subject. Download your questions
         instantly as a PDF!
       </Typography>
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col sm:flex-row gap-4 w-full max-w-screen-lg justify-center">
         <Button
           variant="outlined"
           size="lg"
-          className="transition-transform text-black bg-gray-300 border-gray-400 font-poppins flex items-center justify-center gap-2 whitespace-nowrap w-full sm:w-auto md:min-w-[300px]"
+          className="transition-transform text-black bg-gray-300 border-gray-400 font-poppins flex items-center justify-center gap-2 whitespace-nowrap w-full sm:w-auto md:min-w-[250px] lg:min-w-[300px] py-3"
           onClick={scrollToQuestions}
         >
           Explore Prompts
@@ -36,14 +36,14 @@ const HeroSectionGuest = ({ scrollToQuestions }) => {
           variant="gradient"
           color="green"
           size="lg"
-          className="transition-transform text-white font-poppins flex items-center justify-center gap-2 whitespace-nowrap w-full sm:w-auto md:min-w-[300px]"
+          className="transition-transform text-white font-poppins flex items-center justify-center gap-2 whitespace-nowrap w-full sm:w-auto md:min-w-[250px] lg:min-w-[300px] py-3"
           onClick={() => navigate("/signup")}
         >
           Sign Up Now
           <IoIosLock size={24} />
         </Button>
       </div>
-    </>
+    </div>
   );
 };
 

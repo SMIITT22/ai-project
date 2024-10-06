@@ -32,7 +32,7 @@ const PromptExamples = () => {
 
   const handlePromptClick = () => {
     if (isAuthenticated) {
-      navigate("/generate-questions");
+      navigate("/");
     } else {
       navigate("/signup");
     }
