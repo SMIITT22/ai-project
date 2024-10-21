@@ -24,7 +24,7 @@ const SuggesionFlow = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 lg:gap-8">
           <div className="flex flex-col items-center">
-            <FaKeyboard className="text-green-500 w-16 h-16 mb-4" />{" "}
+            <FaKeyboard className="text-black w-16 h-16 mb-4" />{" "}
             <Typography
               variant="h6"
               className="font-poppins text-black font-semibold mb-2"
@@ -38,12 +38,12 @@ const SuggesionFlow = () => {
           </div>
           <Typography
             variant="h2"
-            className="hidden sm:block text-4xl lg:text-5xl font-gloria text-green-500"
+            className="hidden sm:block text-4xl lg:text-5xl font-gloria text-black"
           >
             →
           </Typography>
           <div className="flex flex-col items-center">
-            <FaCog className="text-green-500 w-16 h-16 mb-4" />{" "}
+            <FaCog className="text-black w-16 h-16 mb-4" />{" "}
             <Typography
               variant="h6"
               className="font-poppins text-black font-semibold mb-2"
@@ -57,12 +57,12 @@ const SuggesionFlow = () => {
           </div>
           <Typography
             variant="h2"
-            className="hidden sm:block text-4xl lg:text-5xl font-gloria text-green-500"
+            className="hidden sm:block text-4xl lg:text-5xl font-gloria text-black"
           >
             →
           </Typography>
           <div className="flex flex-col items-center">
-            <FaFilePdf className="text-green-500 w-16 h-16 mb-4" />{" "}
+            <FaFilePdf className="text-black w-16 h-16 mb-4" />{" "}
             <Typography
               variant="h6"
               className="font-poppins text-black font-semibold mb-2"

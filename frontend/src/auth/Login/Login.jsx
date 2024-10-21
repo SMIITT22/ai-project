@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error } = useSelector((state) => state.auth);
+  const { loading } = useSelector((state) => state.auth);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,7 +38,7 @@ const Login = () => {
             Login to Questions Generator
           </Typography>
 
-          <Typography className="text-center text-gray-500 text-sm">
+          <Typography className="text-center font-poppins text-gray-500 text-sm">
             Generate AI powered exam papers.
           </Typography>
 
@@ -77,11 +77,11 @@ const Login = () => {
           />
         </div>
 
-        {error && (
+        {/* {error && (
           <Typography className="text-center text-red-500 mb-4">
             {error}
           </Typography>
-        )}
+        )} */}
 
         <Button
           fullWidth

@@ -9,25 +9,27 @@ const PromptExamples = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
 
   const row1Content = [
-    "Create a full NEET paper",
-    "90 Physics questions for Class 12th",
-    "Std 8th Biology questions without options",
-    "45 Chemistry MCQs from Std 11th syllabus",
-    "Physics MCQs for Std 10th",
+    "Create questions on the skeletal system in human anatomy",
+    "Generate questions covering Newton's laws in mechanics",
+    "Questions about photosynthesis in plant physiology, without options",
+    "Prepare MCQs related to hydrocarbons in organic chemistry",
+    "Practice questions on magnetic fields and forces in electromagnetism",
   ];
 
   const row2Content = [
-    "NEET Biology paper with 90 questions",
-    "100 random Chemistry questions for NEET",
-    "60 Physics questions",
-    "Revision questions for Std 9th Biology",
+    "Draft questions on the digestive system in human anatomy",
+    "Create questions related to trends in the periodic table in chemistry",
+    "Provide questions focusing on the laws of thermodynamics in physics",
+    "Revision questions about cell structure in biology",
+    "Practice MCQs on acids, bases, and salts in chemistry",
   ];
 
   const row3Content = [
-    "Mock test for NEET Physics",
-    "Science questions for Std 10th",
-    "Std 8th Biology questions with answers",
-    "Practice MCQs for Std 11th Chemistry",
+    "Create questions on electricity and circuits in physics",
+    "Generate questions on genetics and heredity in biology",
+    "Prepare MCQs related to chemical bonding in chemistry",
+    "Questions about motion and kinematics in physics",
+    "Draft practice questions on ecosystems and biodiversity in biology",
   ];
 
   const handlePromptClick = () => {
@@ -61,7 +63,7 @@ const PromptExamples = () => {
   return (
     <div
       id="sample-questions-section"
-      className="flex flex-col items-center justify-center px-4 sm:px-10 md:px-16 lg:px-20 xl:px-32 bg-white text-center pt-20 pb-10"
+      className="flex flex-col items-center justify-center px-4 sm:px-10 md:px-16 lg:px-20 xl:px-32 bg-white text-center pt-20 pb-20"
     >
       <div className="container mx-auto px-4 sm:px-8 flex flex-col items-center">
         <Typography

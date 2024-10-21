@@ -2,13 +2,16 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Typography,
+  Select,
+  Option,
+  Button,
   Menu,
   MenuHandler,
   MenuList,
   MenuItem,
-  Button,
 } from "@material-tailwind/react";
-import { AiOutlineArrowRight, AiOutlineMore } from "react-icons/ai";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { AiOutlineArrowRight } from "react-icons/ai";
 import { FaSpinner } from "react-icons/fa";
 
 // Heading Component
@@ -34,25 +37,93 @@ const Heading = ({ currentPhrase }) => (
 const InputSection = ({ onGenerate }) => {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
+  const [testPattern, setTestPattern] = useState("Only MCQs");
+  const [numQuestions, setNumQuestions] = useState(10);
+  const [isTestPatternOpen, setIsTestPatternOpen] = useState(false);
+  const [isNumQuestionsOpen, setIsNumQuestionsOpen] = useState(false);
 
   const handleGenerate = () => {
     if (prompt) {
       setLoading(true);
-      onGenerate(prompt);
+
+      // Create an object representing the data to be sent to the backend
+      const requestData = {
+        testPattern,
+        numQuestions,
+        prompt,
+      };
+
+      // Log the data to the console
+      console.log("Request Data to Backend:", requestData);
+
+      const fullPrompt = `Pattern: ${testPattern}, Number of Questions: ${numQuestions}, Subject & Topic: ${prompt}`;
+      onGenerate(fullPrompt);
       setPrompt("");
       setTimeout(() => setLoading(false), 3000);
     }
   };
 
+  const handleTestPatternChange = (value) => {
+    setTestPattern(value);
+    setIsTestPatternOpen(false); // Close the dropdown
+  };
+
+  const handleNumQuestionsChange = (value) => {
+    setNumQuestions(value);
+    setIsNumQuestionsOpen(false); // Close the dropdown
+  };
+
   return (
-    <div className="max-w-full sm:max-w-3xl mx-auto mb-6">
+    <div className="max-w-full sm:max-w-3xl mx-auto mb-6 px-4">
+      {/* Dropdowns in one line */}
+      <div className="flex flex-col sm:flex-row gap-4 mb-4">
+        <Select
+          value={testPattern}
+          label="Select Question Type"
+          onChange={(value) => handleTestPatternChange(value)}
+          color="black"
+          open={isTestPatternOpen}
+          onOpen={() => setIsTestPatternOpen(true)}
+          onClose={() => setIsTestPatternOpen(false)}
+          animate={{
+            mount: { y: 0 },
+            unmount: { y: 25 },
+          }}
+          className="flex-grow"
+        >
+          <Option value="Only MCQs">Only MCQs</Option>
+          <Option value="Only True/False">Only True/False</Option>
+          <Option value="Both MCQs and True/False">
+            Both MCQs and True/False
+          </Option>
+        </Select>
+        <Select
+          value={numQuestions}
+          onChange={(value) => handleNumQuestionsChange(value)}
+          label="How many Questions?"
+          color="black"
+          open={isNumQuestionsOpen}
+          onOpen={() => setIsNumQuestionsOpen(true)}
+          onClose={() => setIsNumQuestionsOpen(false)}
+          animate={{
+            mount: { y: 0 },
+            unmount: { y: 25 },
+          }}
+          className="flex-grow"
+        >
+          <Option value={10}>10</Option>
+          <Option value={25}>25</Option>
+          <Option value={50}>50</Option>
+        </Select>
+      </div>
+      {/* Prompt Input Field */}
       <div className="relative">
         <div className="w-full flex items-center bg-black shadow-lg border border-gray-300 rounded-full transition duration-300">
           <input
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             className="w-full bg-black border-none text-white rounded-full font-poppins focus:outline-none px-4 py-2 sm:px-6 sm:py-4 pr-12 sm:pr-16 text-xs sm:text-sm md:text-base lg:text-lg"
-            placeholder="Enter your prompt here..."
+            placeholder="Enter Subject & Topic..."
           />
           <div className="pr-1 sm:pr-2">
             <button
@@ -69,15 +140,15 @@ const InputSection = ({ onGenerate }) => {
         </div>
       </div>
       {/* Suggestions */}
-      <div className="flex flex-wrap justify-center gap-3 mt-6">
+      <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-3 mt-6">
         {[
-          "Std 8th Biology questions without options",
-          "45 Chemistry MCQs from Std 11th syllabus",
-          "Physics MCQs for Std 10th",
+          "Prepare questions on work, energy, and power in physics",
+          "Draft questions about the nervous system in human anatomy",
+          "Practice questions on chemical reactions and equations",
         ].map((suggestion, index) => (
           <button
             key={index}
-            className="rounded-full border font-poppins border-gray-300 text-xs sm:text-sm md:text-base text-gray-700 px-3 py-1 bg-white hover:text-white hover:bg-black hover:border-black transition duration-200 ease-in-out shadow-sm whitespace-nowrap"
+            className="rounded-full border font-poppins border-gray-300 text-xs sm:text-sm md:text-base text-gray-700 px-3 py-1 bg-white hover:text-white hover:bg-black hover:border-black transition duration-200 ease-in-out shadow-sm w-full sm:w-auto"
             onClick={() => setPrompt(suggestion)}
           >
             {suggestion}
@@ -88,25 +159,64 @@ const InputSection = ({ onGenerate }) => {
   );
 };
 
-const GeneratedOutput = ({ loading, generatedOutput, prompt }) => {
-  const handleDownloadPDF = () => {
-    console.log("Download as PDF triggered");
+const GeneratedOutput = ({ loading }) => {
+  const [questions, setQuestions] = useState([
+    {
+      question: "What is the capital of France?",
+      options: ["Paris", "London", "Berlin", "Madrid"],
+      correctAnswer: "Paris",
+    },
+    {
+      question: "Which planet is known as the Red Planet?",
+      options: ["Earth", "Mars", "Jupiter", "Saturn"],
+      correctAnswer: "Mars",
+    },
+    {
+      question: "What is the chemical symbol for water?",
+      options: ["H2O", "O2", "CO2", "NaCl"],
+      correctAnswer: "H2O",
+    },
+  ]);
+
+  const [editIndex, setEditIndex] = useState(null);
+  const [editedQuestion, setEditedQuestion] = useState("");
+  const [editedOptions, setEditedOptions] = useState([]);
+
+  const optionLabels = ["A", "B", "C", "D"];
+
+  const handleEdit = (index) => {
+    setEditIndex(index);
+    setEditedQuestion(questions[index].question);
+    setEditedOptions([...questions[index].options]);
+  };
+
+  const handleSave = (index) => {
+    const updatedQuestions = [...questions];
+    updatedQuestions[index] = {
+      ...updatedQuestions[index],
+      question: editedQuestion,
+      options: editedOptions,
+    };
+    setQuestions(updatedQuestions);
+    setEditIndex(null);
+  };
+
+  const handleCancel = () => {
+    setEditIndex(null);
+  };
+
+  const handleDelete = (index) => {
+    const updatedQuestions = questions.filter((_, i) => i !== index);
+    setQuestions(updatedQuestions);
   };
 
   return (
-    <div
-      className={`max-w-full lg:max-w-4xl xl:max-w-5xl mx-auto mt-8 mb-8 transition-all duration-500 ease-in-out`}
-    >
-      <div className="border border-gray-500 rounded-lg bg-white">
+    <div className="max-w-full lg:max-w-4xl xl:max-w-5xl mx-auto mt-8 mb-8 px-4">
+      <div className="border border-gray-300 rounded-lg bg-white">
         {loading ? (
-          <div className="animate-pulse">
-            {/* Skeleton for Header */}
-            <div className="bg-gray-300 rounded-t-lg border-b border-gray-500 p-2 flex justify-between items-center">
-              <div className="h-6 bg-gray-400 rounded-full w-1/2"></div>
-              <div className="h-6 bg-gray-400 rounded-full w-8"></div>
-            </div>
-            {/* Skeleton for Content */}
-            <div className="bg-gray-200 rounded-b-lg h-80 sm:h-96 lg:h-[30rem] xl:h-[36rem] p-6">
+          <div className="animate-pulse p-6">
+            {/* Skeleton for loading state */}
+            <div className="bg-gray-300 rounded-lg p-6">
               <div className="h-6 bg-gray-400 rounded-full w-1/2 mb-4"></div>
               <div className="space-y-3">
                 <div className="h-4 bg-gray-400 rounded w-full"></div>
@@ -117,38 +227,109 @@ const GeneratedOutput = ({ loading, generatedOutput, prompt }) => {
             </div>
           </div>
         ) : (
-          <>
-            <div className="bg-gray-300 rounded-t-lg border-b border-gray-500">
-              <div className="flex justify-between items-center p-2 px-3 font-poppins rounded-t-lg">
-                <span className="text-xs sm:text-sm md:text-base flex-grow text-black whitespace-nowrap overflow-hidden text-ellipsis">
-                  {prompt}
-                </span>
-                <Menu>
-                  <MenuHandler>
-                    <Button variant="text" className="flex-none text-black p-1">
-                      <AiOutlineMore className="h-6 w-6" />
-                    </Button>
-                  </MenuHandler>
-                  <MenuList className="p-0 bg-white border border-gray-50 w-32 sm:w-40 lg:w-56">
-                    <MenuItem
-                      onClick={handleDownloadPDF}
-                      className="bg-white text-black text-xs sm:text-sm lg:text-base font-poppins px-1 sm:px-4 lg:px-6 p-2 sm:py-2 lg:py-3"
-                    >
-                      Download as PDF
-                    </MenuItem>
-                  </MenuList>
-                </Menu>
-              </div>
-            </div>
+          <div className="p-6">
+            {questions.map((q, index) => (
+              <div
+                key={index}
+                className="relative mb-8 border-b border-gray-300 pb-8"
+              >
+                <div className="flex flex-col">
+                  {editIndex === index ? (
+                    <>
+                      {/* Display the label above the input field */}
+                      <label className="block text-black text-sm font-bold mb-2">
+                        Question
+                      </label>
+                      <input
+                        type="text"
+                        value={editedQuestion}
+                        onChange={(e) => setEditedQuestion(e.target.value)}
+                        className="w-full mb-4 p-2 border border-gray-300 rounded text-sm sm:text-base"
+                      />
+                    </>
+                  ) : (
+                    <div className="flex items-start justify-between w-full">
+                      <p className="font-poppins text-base sm:text-lg text-black mb-2 flex-grow">
+                        {index + 1}. {q.question}
+                      </p>
+                      {/* Three-dot menu for edit/delete actions */}
+                      <div className="ml-2">
+                        <Menu placement="bottom-end">
+                          <MenuHandler>
+                            <div className="cursor-pointer">
+                              <BsThreeDotsVertical size={20} />
+                            </div>
+                          </MenuHandler>
+                          <MenuList className="bg-white text-black border-gray-300 shadow-md rounded-lg">
+                            <MenuItem onClick={() => handleEdit(index)}>
+                              Edit
+                            </MenuItem>
+                            <hr className="border-t border-gray-300 my-1" />
+                            <MenuItem onClick={() => handleDelete(index)}>
+                              Delete
+                            </MenuItem>
+                          </MenuList>
+                        </Menu>
+                      </div>
+                    </div>
+                  )}
+                </div>
 
-            <div className="bg-gray-200 rounded-b-lg h-80 sm:h-96 lg:h-[30rem] xl:h-[36rem] flex flex-col px-3 py-2">
-              <div className="overflow-auto flex-grow max-h-full">
-                <pre className="text-black whitespace-pre-wrap font-poppins text-xs sm:text-sm md:text-base">
-                  {generatedOutput}
-                </pre>
+                <ul className="list-none pl-0 mt-4">
+                  {editIndex === index && (
+                    <label className="block text-black text-sm font-bold mb-1">
+                      Options
+                    </label>
+                  )}
+                  {q.options.map((option, idx) => (
+                    <li key={idx} className="mb-2">
+                      {editIndex === index ? (
+                        <input
+                          type="text"
+                          value={editedOptions[idx]}
+                          onChange={(e) => {
+                            const updatedOptions = [...editedOptions];
+                            updatedOptions[idx] = e.target.value;
+                            setEditedOptions(updatedOptions);
+                          }}
+                          className="w-full p-2 border border-gray-300 rounded text-sm sm:text-base"
+                        />
+                      ) : (
+                        <div className="p-2 rounded-lg bg-gray-100 cursor-pointer hover:bg-gray-200 transition">
+                          <span className="font-bold mr-2">
+                            {optionLabels[idx]}.
+                          </span>
+                          {option}
+                        </div>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                {/* Save and Cancel buttons at the bottom right */}
+                {editIndex === index && (
+                  <div className="flex justify-end mt-4 gap-2">
+                    <Button
+                      variant="text"
+                      size="sm"
+                      className="whitespace-nowrap bg-gray-300"
+                      onClick={() => handleSave(index)}
+                    >
+                      <span>Save</span>
+                    </Button>
+                    <Button
+                      variant="gradient"
+                      size="sm"
+                      color="black"
+                      className="whitespace-nowrap"
+                      onClick={handleCancel}
+                    >
+                      <span>Cancel</span>
+                    </Button>
+                  </div>
+                )}
               </div>
-            </div>
-          </>
+            ))}
+          </div>
         )}
       </div>
     </div>
@@ -157,16 +338,14 @@ const GeneratedOutput = ({ loading, generatedOutput, prompt }) => {
 
 // Main Component
 const HeroSectionUser = () => {
-  const [generatedOutput, setGeneratedOutput] = useState("");
   const [loading, setLoading] = useState(false);
   const [isGeneratedVisible, setIsGeneratedVisible] = useState(false);
 
-  const handleGenerate = (prompt) => {
+  const handleGenerate = () => {
     setLoading(true);
     setIsGeneratedVisible(true);
 
     setTimeout(() => {
-      setGeneratedOutput(`${prompt}`);
       setLoading(false);
     }, 3000);
   };
@@ -175,13 +354,7 @@ const HeroSectionUser = () => {
     <div className="container mx-auto px-4 md:px-6 lg:px-8 py-6">
       <Heading currentPhrase={"Generate Your Custom Questions!"} />
       <InputSection onGenerate={handleGenerate} />
-      {isGeneratedVisible && (
-        <GeneratedOutput
-          prompt={generatedOutput}
-          loading={loading}
-          generatedOutput={generatedOutput}
-        />
-      )}
+      {isGeneratedVisible && <GeneratedOutput loading={loading} />}
     </div>
   );
 };
