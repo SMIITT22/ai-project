@@ -46,71 +46,73 @@ const App = () => {
   }
 
   return (
-    <>
-      <Header />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <HeroSection scrollToQuestions={scrollToSampleQuestions} />
-              <PromptExamples />
-              {!isAuthenticated && <SuggesionFlow />}
-              {!isAuthenticated && <QuestionsSection />}
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <PublicRoute>
-              <SignUp />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/generations"
-          element={
-            <PrivateRoute>
-              <Genrations />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/pricing"
-          element={
-            <PrivateRoute>
-              <Pricing />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/settings"
-          element={
-            <PrivateRoute>
-              <Settings />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/support"
-          element={
-            <PrivateRoute>
-              <Support />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
-    </>
+    <div className="flex flex-col min-h-screen">
+      <Header/>
+      <main className="flex-grow">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <HeroSection scrollToQuestions={scrollToSampleQuestions} />
+                <PromptExamples />
+                {!isAuthenticated && <SuggesionFlow />}
+                {!isAuthenticated && <QuestionsSection />}
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <PublicRoute>
+                <SignUp />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/generations"
+            element={
+              <PrivateRoute>
+                <Genrations />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/pricing"
+            element={
+              <PrivateRoute>
+                <Pricing />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <PrivateRoute>
+                <Settings />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/support"
+            element={
+              <PrivateRoute>
+                <Support />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </main>
+    </div>
   );
 };
 
