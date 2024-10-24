@@ -2,44 +2,70 @@ import { useState } from "react";
 import { Select, Option } from "@material-tailwind/react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { FaSpinner } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  generateQuestions,
+  selectLoading as selectQuestionsLoading,
+} from "../../redux/questionsSlice";
 
-const InputSection = ({ onGenerate }) => {
+const InputSection = ({ setNotification }) => {
   const [prompt, setPrompt] = useState("");
-  const [loading, setLoading] = useState(false);
   const [testPattern, setTestPattern] = useState("Only MCQs");
-  const [numQuestions, setNumQuestions] = useState(10);
-  const [isTestPatternOpen, setIsTestPatternOpen] = useState(false);
-  const [isNumQuestionsOpen, setIsNumQuestionsOpen] = useState(false);
+  const [numQuestions, setNumQuestions] = useState("10");
+  const dispatch = useDispatch();
+  const loading = useSelector(selectQuestionsLoading);
 
   const handleGenerate = () => {
     if (prompt) {
-      setLoading(true);
-
-      // Create an object representing the data to be sent to the backend
       const requestData = {
-        testPattern,
-        numQuestions,
-        prompt,
+        question_type: testPattern,
+        num_questions: parseInt(numQuestions, 10),
+        prompt: prompt,
       };
 
-      // Log the data to the console
-      console.log("Request Data to Backend:", requestData);
+      // Reset notification before generating
+      setNotification({ message: "", type: "" });
 
-      const fullPrompt = `Pattern: ${testPattern}, Number of Questions: ${numQuestions}, Subject & Topic: ${prompt}`;
-      onGenerate(fullPrompt);
-      setPrompt("");
-      setTimeout(() => setLoading(false), 3000);
+      dispatch(generateQuestions(requestData))
+        .unwrap()
+        .then(() => {
+          // Show success notification
+          setNotification({
+            message: "Questions generated successfully!",
+            type: "success",
+          });
+          // Clear form fields after success
+          resetForm();
+        })
+        .catch((error) => {
+          // Show error notification
+          setNotification({
+            message:
+              error?.detail || "An error occurred while generating questions.",
+            type: "error",
+          });
+        });
+    } else {
+      // Show error notification if prompt is empty
+      setNotification({
+        message: "Please enter a prompt.",
+        type: "error",
+      });
     }
+  };
+
+  const resetForm = () => {
+    setPrompt("");
+    setTestPattern("Only MCQs");
+    setNumQuestions("10");
   };
 
   const handleTestPatternChange = (value) => {
     setTestPattern(value);
-    setIsTestPatternOpen(false); // Close the dropdown
   };
 
   const handleNumQuestionsChange = (value) => {
     setNumQuestions(value);
-    setIsNumQuestionsOpen(false); // Close the dropdown
   };
 
   return (
@@ -51,9 +77,6 @@ const InputSection = ({ onGenerate }) => {
           label="Select Question Type"
           onChange={(value) => handleTestPatternChange(value)}
           color="black"
-          open={isTestPatternOpen}
-          onOpen={() => setIsTestPatternOpen(true)}
-          onClose={() => setIsTestPatternOpen(false)}
           animate={{
             mount: { y: 0 },
             unmount: { y: 25 },
@@ -71,18 +94,15 @@ const InputSection = ({ onGenerate }) => {
           onChange={(value) => handleNumQuestionsChange(value)}
           label="How many Questions?"
           color="black"
-          open={isNumQuestionsOpen}
-          onOpen={() => setIsNumQuestionsOpen(true)}
-          onClose={() => setIsNumQuestionsOpen(false)}
           animate={{
             mount: { y: 0 },
             unmount: { y: 25 },
           }}
           className="flex-grow"
         >
-          <Option value={10}>10</Option>
-          <Option value={25}>25</Option>
-          <Option value={50}>50</Option>
+          <Option value="10">10</Option>
+          <Option value="25">25</Option>
+          <Option value="50">50</Option>
         </Select>
       </div>
       {/* Prompt Input Field */}
@@ -98,6 +118,7 @@ const InputSection = ({ onGenerate }) => {
             <button
               className="bg-white text-black rounded-full p-2 transition duration-300 ease-in-out"
               onClick={handleGenerate}
+              disabled={loading}
             >
               {loading ? (
                 <FaSpinner className="h-3 w-3 sm:h-6 sm:w-6 animate-spin" />
