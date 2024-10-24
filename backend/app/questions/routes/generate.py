@@ -32,18 +32,25 @@ async def generate_questions_endpoint(
             raise HTTPException(status_code=404, detail="User not found")
         num_questions = request_data.num_questions
         prompt = request_data.prompt
-        question_type = request_data.question_type
-        valid_question_types = ["Only MCQs", "Only True/False", "Both MCQs and True/False"]
-        if question_type not in valid_question_types:
-            raise HTTPException(status_code=400, detail="Invalid question type.")
+        question_format = request_data.question_format
+        
+        valid_question_formats = ["Only MCQs", "Only True/False", "Both MCQs and True/False"]
+        if question_format not in valid_question_formats:
+            raise HTTPException(status_code=400, detail="Invalid question format.")        
         if not user.is_subscribed and user.free_generation_count >= 2:
             raise HTTPException(status_code=403, detail="Free generation limit reached.")
         if not user.is_subscribed and num_questions != 10:
-            raise HTTPException(status_code=403, detail="Free users are limited to generating 10 questions.")
-        questions = openai_utils.generate_questions(question_type, num_questions, prompt)
+            raise HTTPException(status_code=403, detail="Free users are limited to generating 10 questions.")        
+        questions = openai_utils.generate_questions(question_format, num_questions, prompt)
         if isinstance(questions, str):
-            raise HTTPException(status_code=500, detail=questions)
-        new_request = QuestionRequest(user_id=user.id, num_questions=num_questions, prompt=prompt, request_time=datetime.utcnow())
+            raise HTTPException(status_code=500, detail=questions)        
+        new_request = QuestionRequest(
+            user_id=user.id,
+            num_questions=num_questions,
+            prompt=prompt,
+            request_time=datetime.utcnow(),
+            question_format=question_format
+        )
         db.add(new_request)
         db.commit()
         db.refresh(new_request)

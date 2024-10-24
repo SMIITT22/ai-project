@@ -20,6 +20,8 @@ class QuestionRequest(Base):
     num_questions = Column(Integer)
     prompt = Column(String)
     request_time = Column(DateTime, default=datetime.utcnow)
+    question_format = Column(String, default="Both MCQs and True/False") 
+
 
     user = relationship("User", back_populates="question_requests")
     generated_questions = relationship("GeneratedQuestion", back_populates="request")
