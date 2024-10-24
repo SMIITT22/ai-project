@@ -85,7 +85,7 @@ async def logout(response: Response):
     return {"message": "Logout successful"}
 
 @auth_router.get("/status")
-async def get_user_status(request: Request):
+async def get_user_status(request: Request, db: Session = Depends(get_db)):
     # Extract access token from cookie
     access_token = request.cookies.get("accessToken")
     if not access_token:
@@ -99,8 +99,15 @@ async def get_user_status(request: Request):
     if not user_email:
         raise HTTPException(status_code=401, detail="Invalid token payload")
 
+    # Fetch the user from the database
+    user = db.query(User).filter(User.email == user_email).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
     return {
         "user": {
-            "email": user_email
+            "email": user.email,
+            "is_subscribed": user.is_subscribed,
+            "free_generation_count": user.free_generation_count 
         }
     }
