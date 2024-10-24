@@ -7,6 +7,8 @@ import axios from "axios";
 
 const initialState = {
   user: null,
+  isSubscribed: false, 
+  freeGenerationCount: 0,
   status: "idle", // 'idle' | 'loading' | 'succeeded' | 'failed'
   loading: true,
   error: null,
@@ -87,6 +89,8 @@ const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.user = null;
+      state.isSubscribed = false;
+      state.freeGenerationCount = 0;
       state.status = "idle";
       state.loading = false;
     },
@@ -121,6 +125,8 @@ const authSlice = createSlice({
       })
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
+        state.isSubscribed = false;
+        state.freeGenerationCount = 0;
         state.status = "idle";
         state.loading = false;
       })
@@ -134,13 +140,17 @@ const authSlice = createSlice({
         state.loading = true;
       })
       .addCase(checkUserStatus.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = action.payload.user.email;
+        state.isSubscribed = action.payload.user.is_subscribed;
+        state.freeGenerationCount = action.payload.user.free_generation_count;
         state.status = "succeeded";
         state.loading = false;
       })
       .addCase(checkUserStatus.rejected, (state) => {
         state.status = "idle";
         state.user = null;
+        state.isSubscribed = false;
+        state.freeGenerationCount = 0;
         state.loading = false;
       });
   },
@@ -152,6 +162,9 @@ export const selectIsAuthenticated = createSelector(
 );
 export const selectLoading = (state) => state.auth.loading;
 export const selectUser = (state) => state.auth.user;
+export const selectIsSubscribed = (state) => state.auth.isSubscribed;
+export const selectFreeGenerationCount = (state) =>
+  state.auth.freeGenerationCount;
 
 export const { logout } = authSlice.actions;
 export default authSlice.reducer;

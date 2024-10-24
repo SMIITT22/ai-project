@@ -16,7 +16,7 @@ import { RiMoneyRupeeCircleFill } from "react-icons/ri";
 import { BiSupport } from "react-icons/bi";
 import { FaSignOutAlt } from "react-icons/fa";
 
-const ProfileMenu = ({ userEmail }) => {
+const ProfileMenu = ({ userEmail = "" }) => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,7 +31,9 @@ const ProfileMenu = ({ userEmail }) => {
   };
 
   const truncatedEmail =
-    userEmail.length > 20 ? `${userEmail.substring(0, 17)}...` : userEmail;
+    userEmail?.length > 20
+      ? `${userEmail.substring(0, 17)}...`
+      : userEmail || "Guest";
 
   return (
     <div className="relative font-poppins">

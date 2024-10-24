@@ -7,6 +7,11 @@ import {
   generateQuestions,
   selectLoading as selectQuestionsLoading,
 } from "../../redux/questionsSlice";
+import {
+  selectIsSubscribed,
+  selectFreeGenerationCount,
+} from "../../../../auth/authSlice";
+import getFriendlyErrorMessage from "../../../../utils/errorHandler";
 
 const InputSection = ({ setNotification }) => {
   const [prompt, setPrompt] = useState("");
@@ -14,44 +19,55 @@ const InputSection = ({ setNotification }) => {
   const [numQuestions, setNumQuestions] = useState("10");
   const dispatch = useDispatch();
   const loading = useSelector(selectQuestionsLoading);
+  const isSubscribed = useSelector(selectIsSubscribed);
+  const freeGenerationCount = useSelector(selectFreeGenerationCount);
 
   const handleGenerate = () => {
-    if (prompt) {
-      const requestData = {
-        question_type: testPattern,
-        num_questions: parseInt(numQuestions, 10),
-        prompt: prompt,
-      };
-
-      // Reset notification before generating
-      setNotification({ message: "", type: "" });
-
-      dispatch(generateQuestions(requestData))
-        .unwrap()
-        .then(() => {
-          // Show success notification
-          setNotification({
-            message: "Questions generated successfully!",
-            type: "success",
-          });
-          // Clear form fields after success
-          resetForm();
-        })
-        .catch((error) => {
-          // Show error notification
-          setNotification({
-            message:
-              error?.detail || "An error occurred while generating questions.",
-            type: "error",
-          });
-        });
-    } else {
-      // Show error notification if prompt is empty
+    if (!prompt) {
       setNotification({
         message: "Please enter a prompt.",
         type: "error",
       });
+      return;
     }
+
+    const numQuestionsInt = parseInt(numQuestions, 10);
+
+    // Check if the user is allowed to generate the selected number of questions
+    if (!isSubscribed && (numQuestionsInt !== 10 || freeGenerationCount >= 2)) {
+      setNotification({
+        message: "Free users can generate only 10 questions, up to 2 times.",
+        type: "error",
+      });
+      return;
+    }
+
+    const requestData = {
+      question_format: testPattern,
+      num_questions: numQuestionsInt,
+      prompt: prompt,
+    };
+
+    // Reset notification before generating
+    setNotification({ message: "", type: "" });
+
+    dispatch(generateQuestions(requestData))
+      .unwrap()
+      .then(() => {
+        setNotification({
+          message: "Questions generated successfully!",
+          type: "success",
+        });
+        resetForm();
+      })
+      .catch((error) => {
+        // Use the error handler utility
+        const friendlyMessage = getFriendlyErrorMessage(error);
+        setNotification({
+          message: friendlyMessage,
+          type: "error",
+        });
+      });
   };
 
   const resetForm = () => {
@@ -76,7 +92,7 @@ const InputSection = ({ setNotification }) => {
           value={testPattern}
           label="Select Question Type"
           onChange={(value) => handleTestPatternChange(value)}
-          color="black"
+          color="gray"
           animate={{
             mount: { y: 0 },
             unmount: { y: 25 },
@@ -93,7 +109,7 @@ const InputSection = ({ setNotification }) => {
           value={numQuestions}
           onChange={(value) => handleNumQuestionsChange(value)}
           label="How many Questions?"
-          color="black"
+          color="gray"
           animate={{
             mount: { y: 0 },
             unmount: { y: 25 },
