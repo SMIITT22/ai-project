@@ -6,7 +6,7 @@ const SuggesionFlow = () => {
   return (
     <>
       <Divider />
-      <div className="flex flex-col items-center justify-center px-4 sm:px-10 md:px-16 lg:px-20 xl:px-32 bg-white text-center pt-20 pb-20">
+      <div className="flex flex-col items-center justify-center min-h-screen w-full bg-white text-center px-4 sm:px-10 md:px-16 lg:px-24 xl:px-32 pt-20 pb-20">
         <Typography
           variant="h2"
           className="text-2xl sm:text-3xl md:text-4xl font-poppins text-black font-bold mb-6"
@@ -24,14 +24,14 @@ const SuggesionFlow = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 lg:gap-8">
           <div className="flex flex-col items-center">
-            <FaKeyboard className="text-black w-16 h-16 mb-4" />{" "}
+            <FaKeyboard className="text-black w-16 h-16 mb-4" />
             <Typography
               variant="h6"
               className="font-poppins text-black font-semibold mb-2"
             >
               Input a Prompt
             </Typography>
-            <Typography className="text-gray-700 font-poppins">
+            <Typography className="text-gray-700 font-poppins text-sm sm:text-base">
               Tell the AI what you need. For example, &quot;Generate 15 physics
               questions on electricity for Grade 10.&quot;
             </Typography>
@@ -43,14 +43,14 @@ const SuggesionFlow = () => {
             →
           </Typography>
           <div className="flex flex-col items-center">
-            <FaCog className="text-black w-16 h-16 mb-4" />{" "}
+            <FaCog className="text-black w-16 h-16 mb-4" />
             <Typography
               variant="h6"
               className="font-poppins text-black font-semibold mb-2"
             >
               AI Generates Questions
             </Typography>
-            <Typography className="text-gray-700 font-poppins">
+            <Typography className="text-gray-700 font-poppins text-sm sm:text-base">
               The AI creates custom questions based on your input. You can
               generate as many questions as you need.
             </Typography>
@@ -62,14 +62,14 @@ const SuggesionFlow = () => {
             →
           </Typography>
           <div className="flex flex-col items-center">
-            <FaFilePdf className="text-black w-16 h-16 mb-4" />{" "}
+            <FaFilePdf className="text-black w-16 h-16 mb-4" />
             <Typography
               variant="h6"
               className="font-poppins text-black font-semibold mb-2"
             >
               Download as PDF
             </Typography>
-            <Typography className="text-gray-700 font-poppins">
+            <Typography className="text-gray-700 font-poppins text-sm sm:text-base">
               Once your questions are ready, download them instantly as a
               ready-to-use PDF.
             </Typography>

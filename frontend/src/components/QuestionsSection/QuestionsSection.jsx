@@ -5,7 +5,7 @@ const QuestionsSection = () => {
   return (
     <>
       <Divider />
-      <div className="flex flex-col items-center justify-center px-6 md:px-16 lg:px-24 bg-white text-center pt-20 pb-10">
+      <div className="flex flex-col items-center justify-center min-h-screen w-full px-6 md:px-20 lg:px-32 bg-white text-center pt-20 pb-20">
         <Typography
           variant="h2"
           className="text-2xl sm:text-3xl md:text-4xl font-poppins text-black font-bold mb-6"
@@ -19,7 +19,7 @@ const QuestionsSection = () => {
           See how we stand out when it comes to generating and downloading
           custom question sets.
         </Typography>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full px-4 md:px-12">
           <Card className="p-6 shadow-lg border border-gray-300 bg-white rounded-lg transform transition-all hover:scale-105 hover:shadow-2xl">
             <div className="mb-4">
               <Typography

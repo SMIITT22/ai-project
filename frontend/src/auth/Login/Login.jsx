@@ -25,27 +25,27 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white px-4 sm:px-6 lg:px-8 pt-5">
-      <div className="w-full max-w-md p-6 sm:p-8 rounded-lg shadow-lg bg-white border border-gray-300">
+    <div className="flex items-center justify-center h-screen w-full bg-white px-4">
+      <div className="w-full max-w-sm p-6 sm:p-8 rounded-lg shadow-lg bg-white border border-gray-300">
         <div className="flex flex-col items-center mb-6">
-          <div className="w-20 h-20 flex items-center justify-center">
+          <div className="w-16 h-16 flex items-center justify-center mb-2">
             <Typography variant="h4" className="text-black font-gloria">
               QG
             </Typography>
           </div>
 
-          <Typography className="text-center font-bold font-poppins text-black mb-2 text-lg sm:text-xl md:text-2xl">
+          <Typography className="text-center font-bold font-poppins text-black mb-2 text-lg sm:text-xl">
             Login to Questions Generator
           </Typography>
 
           <Typography className="text-center font-poppins text-gray-500 text-sm">
-            Generate AI powered exam papers.
+            Generate AI powered question sets.
           </Typography>
 
           <hr className="w-full border-gray-300 mt-4" />
         </div>
 
-        <div className="mb-6">
+        <div className="mb-4">
           <Typography variant="small" className="text-black font-poppins mb-1">
             Email
           </Typography>
@@ -57,15 +57,15 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <div className="flex justify-between items-center font-poppins mb-1 mt-2">
-            <Typography variant="small" className="text-black">
+          <div className="flex justify-between items-center font-poppins mb-1">
+            <Typography variant="small" className="text-black font-poppins">
               Password
             </Typography>
             <a
               href="/forgot-password"
               className="text-sm text-black font-poppins hover:underline"
             >
-              forget password?
+              Forgot password?
             </a>
           </div>
           <Input
@@ -77,12 +77,6 @@ const Login = () => {
           />
         </div>
 
-        {/* {error && (
-          <Typography className="text-center text-red-500 mb-4">
-            {error}
-          </Typography>
-        )} */}
-
         <Button
           fullWidth
           className="mb-4 bg-black text-white rounded-md hover:bg-gray-800"
@@ -92,7 +86,7 @@ const Login = () => {
           {loading ? "Logging in..." : "Login"}
         </Button>
 
-        <div className="flex justify-center items-center mb-6">
+        <div className="flex justify-center items-center mb-4">
           <Typography className="text-gray-600 text-sm font-poppins">
             Don’t have an account?{" "}
             <a
@@ -109,7 +103,7 @@ const Login = () => {
           fullWidth
           className="mb-6 border-black text-black hover:bg-gray-100 flex items-center justify-center gap-2"
         >
-          <FcGoogle className="h-4 w-4" /> sign in with Google
+          <FcGoogle className="h-4 w-4" /> Sign in with Google
         </Button>
 
         <Typography

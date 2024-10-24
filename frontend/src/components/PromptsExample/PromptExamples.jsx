@@ -63,7 +63,7 @@ const PromptExamples = () => {
   return (
     <div
       id="sample-questions-section"
-      className="flex flex-col items-center justify-center px-4 sm:px-10 md:px-16 lg:px-20 xl:px-32 bg-white text-center pt-20 pb-20"
+      className="flex flex-col items-center justify-center min-h-screen w-full bg-white text-center pt-20 pb-20"
     >
       <div className="container mx-auto px-4 sm:px-8 flex flex-col items-center">
         <Typography

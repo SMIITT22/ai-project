@@ -46,9 +46,10 @@ const App = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header/>
-      <main className="flex-grow">
+    <div>
+      <Header />
+      <main className="flex-grow pt-20">
+        {/* Adding pt-20 (padding-top) to ensure the content starts below the Header */}
         <Routes>
           <Route
             path="/"
