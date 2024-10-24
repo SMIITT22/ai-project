@@ -14,6 +14,7 @@ import {
   selectLoading,
   selectError,
 } from "../../redux/questionsSlice";
+import getFriendlyErrorMessage from "../../../../utils/errorHandler";
 
 const SkeletonLoader = () => (
   <div className="max-w-full lg:max-w-4xl xl:max-w-5xl mx-auto mt-8 mb-8 px-4">
@@ -57,7 +58,8 @@ const GeneratedOutput = ({ setNotification }) => {
 
   useEffect(() => {
     if (error) {
-      setNotification({ message: error, type: "error" });
+      const friendlyMessage = getFriendlyErrorMessage(error);
+      setNotification({ message: friendlyMessage, type: "error" });
     }
   }, [error, setNotification]);
 
@@ -102,14 +104,6 @@ const GeneratedOutput = ({ setNotification }) => {
   if (loading || !isLoadingComplete) {
     // Always show the SkeletonLoader during the loading phase
     return <SkeletonLoader />;
-  }
-
-  if (error) {
-    return (
-      <div className="text-center mt-8 text-red-500">
-        An error occurred while fetching questions.
-      </div>
-    );
   }
 
   if (questions && questions.length > 0) {
@@ -193,6 +187,8 @@ const GeneratedOutput = ({ setNotification }) => {
   );
 };
 
+export default GeneratedOutput;
+
 const EditQuestion = ({
   questionText,
   options,
@@ -273,5 +269,3 @@ const DisplayQuestion = ({
     )}
   </>
 );
-
-export default GeneratedOutput;

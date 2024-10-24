@@ -48,8 +48,8 @@ const App = () => {
   return (
     <div>
       <Header />
-      <main className="flex-grow pt-16 sm:pt-16 lg:pt-20">
-        {/* Adding pt-20 (padding-top) to ensure the content starts below the Header */}
+      <main className="flex-grow pt-14 sm:pt-14 lg:pt-[4.5rem]">
+      {/* Adding pt-20 (padding-top) to ensure the content starts below the Header */}
         <Routes>
           <Route
             path="/"
