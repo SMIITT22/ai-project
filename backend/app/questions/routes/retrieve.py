@@ -48,6 +48,7 @@ async def get_generated_questions(
                 return []
         questions_response = [
             {
+                "request_id": question.request_id,  # Include the request_id in the response
                 "question_text": question.question_text,
                 "question_type": question.question_type,
                 "options": json.loads(question.options) if question.options else [],
@@ -57,6 +58,7 @@ async def get_generated_questions(
         ]
         logging.info(f"Returning {len(questions_response)} questions for user ID: {user.id}")
         return questions_response
+
     except Exception as e:
         logger.error(f"Database error: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
