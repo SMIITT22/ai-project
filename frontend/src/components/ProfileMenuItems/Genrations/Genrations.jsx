@@ -1,219 +1,22 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchQuestionMetadata } from "../../ProfileMenuItems/Genrations/redux/questionsMetaDataSlice";
 import ProfileMenuScreensHeader from "../../../common/ProfileMenuScreensHeader";
 import GenerationBox from "./parts/GenerationBox";
 import NoGenerations from "./parts/NoGenerations";
 
 const Generations = () => {
-  const [generatedSets, setGeneratedSets] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+
+  const {
+    data: generatedSets,
+    loading: isLoading,
+    error,
+  } = useSelector((state) => state.metadata);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setGeneratedSets([
-        {
-          id: 1,
-          heading: "Math Test",
-          date: "2024-10-23",
-          time: "14:30",
-          numberOfQuestions: 20,
-          prompt: "Generate a set of math questions",
-          format: "Multiple Choice",
-        },
-        {
-          id: 2,
-          heading: "Science Quiz",
-          date: "2024-10-22",
-          time: "09:00",
-          numberOfQuestions: 15,
-          prompt: "Generate science quiz for class 8",
-          format: "Short Answer",
-        },
-        {
-          id: 1,
-          heading: "Math Test",
-          date: "2024-10-23",
-          time: "14:30",
-          numberOfQuestions: 20,
-          prompt: "Generate a set of math questions",
-          format: "Multiple Choice",
-        },
-        {
-          id: 2,
-          heading: "Science Quiz",
-          date: "2024-10-22",
-          time: "09:00",
-          numberOfQuestions: 15,
-          prompt: "Generate science quiz for class 8",
-          format: "Short Answer",
-        },
-        {
-          id: 1,
-          heading: "Math Test",
-          date: "2024-10-23",
-          time: "14:30",
-          numberOfQuestions: 20,
-          prompt: "Generate a set of math questions",
-          format: "Multiple Choice",
-        },
-        {
-          id: 2,
-          heading: "Science Quiz",
-          date: "2024-10-22",
-          time: "09:00",
-          numberOfQuestions: 15,
-          prompt: "Generate science quiz for class 8",
-          format: "Short Answer",
-        },
-        {
-          id: 1,
-          heading: "Math Test",
-          date: "2024-10-23",
-          time: "14:30",
-          numberOfQuestions: 20,
-          prompt: "Generate a set of math questions",
-          format: "Multiple Choice",
-        },
-        {
-          id: 2,
-          heading: "Science Quiz",
-          date: "2024-10-22",
-          time: "09:00",
-          numberOfQuestions: 15,
-          prompt: "Generate science quiz for class 8",
-          format: "Short Answer",
-        },
-        {
-          id: 1,
-          heading: "Math Test",
-          date: "2024-10-23",
-          time: "14:30",
-          numberOfQuestions: 20,
-          prompt: "Generate a set of math questions",
-          format: "Multiple Choice",
-        },
-        {
-          id: 2,
-          heading: "Science Quiz",
-          date: "2024-10-22",
-          time: "09:00",
-          numberOfQuestions: 15,
-          prompt: "Generate science quiz for class 8",
-          format: "Short Answer",
-        },
-        {
-          id: 1,
-          heading: "Math Test",
-          date: "2024-10-23",
-          time: "14:30",
-          numberOfQuestions: 20,
-          prompt: "Generate a set of math questions",
-          format: "Multiple Choice",
-        },
-        {
-          id: 2,
-          heading: "Science Quiz",
-          date: "2024-10-22",
-          time: "09:00",
-          numberOfQuestions: 15,
-          prompt: "Generate science quiz for class 8",
-          format: "Short Answer",
-        },
-        {
-          id: 1,
-          heading: "Math Test",
-          date: "2024-10-23",
-          time: "14:30",
-          numberOfQuestions: 20,
-          prompt: "Generate a set of math questions",
-          format: "Multiple Choice",
-        },
-        {
-          id: 2,
-          heading: "Science Quiz",
-          date: "2024-10-22",
-          time: "09:00",
-          numberOfQuestions: 15,
-          prompt: "Generate science quiz for class 8",
-          format: "Short Answer",
-        },
-        {
-          id: 1,
-          heading: "Math Test",
-          date: "2024-10-23",
-          time: "14:30",
-          numberOfQuestions: 20,
-          prompt: "Generate a set of math questions",
-          format: "Multiple Choice",
-        },
-        {
-          id: 2,
-          heading: "Science Quiz",
-          date: "2024-10-22",
-          time: "09:00",
-          numberOfQuestions: 15,
-          prompt: "Generate science quiz for class 8",
-          format: "Short Answer",
-        },
-        {
-          id: 1,
-          heading: "Math Test",
-          date: "2024-10-23",
-          time: "14:30",
-          numberOfQuestions: 20,
-          prompt: "Generate a set of math questions",
-          format: "Multiple Choice",
-        },
-        {
-          id: 2,
-          heading: "Science Quiz",
-          date: "2024-10-22",
-          time: "09:00",
-          numberOfQuestions: 15,
-          prompt: "Generate science quiz for class 8",
-          format: "Short Answer",
-        },
-        {
-          id: 1,
-          heading: "Math Test",
-          date: "2024-10-23",
-          time: "14:30",
-          numberOfQuestions: 20,
-          prompt: "Generate a set of math questions",
-          format: "Multiple Choice",
-        },
-        {
-          id: 2,
-          heading: "Science Quiz",
-          date: "2024-10-22",
-          time: "09:00",
-          numberOfQuestions: 15,
-          prompt: "Generate science quiz for class 8",
-          format: "Short Answer",
-        },
-        {
-          id: 1,
-          heading: "Math Test",
-          date: "2024-10-23",
-          time: "14:30",
-          numberOfQuestions: 20,
-          prompt: "Generate a set of math questions",
-          format: "Multiple Choice",
-        },
-        {
-          id: 2,
-          heading: "Science Quiz",
-          date: "2024-10-22",
-          time: "09:00",
-          numberOfQuestions: 15,
-          prompt: "Generate science quiz for class 8",
-          format: "Short Answer",
-        },
-      ]);
-      setIsLoading(false);
-    }, 1000); 
-
-    return () => clearTimeout(timeout);
-  }, []);
+    dispatch(fetchQuestionMetadata());
+  }, [dispatch]);
 
   return (
     <div>
@@ -228,6 +31,12 @@ const Generations = () => {
               <GenerationBox key={index} isLoading />
             ))}
           </div>
+        ) : error ? (
+          <p className="text-red-500">
+            {typeof error === "object" && error !== null
+              ? error.detail || "An unknown error occurred."
+              : error}
+          </p>
         ) : generatedSets.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {generatedSets.map((set) => (
