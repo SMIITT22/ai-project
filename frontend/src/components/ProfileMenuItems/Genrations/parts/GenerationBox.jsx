@@ -1,3 +1,6 @@
+import { Tooltip } from "@material-tailwind/react";
+import { AiOutlineInfoCircle } from "react-icons/ai";
+
 const GenerationBox = ({ generation, isLoading }) => {
   if (isLoading) {
     return (
@@ -32,22 +35,31 @@ const GenerationBox = ({ generation, isLoading }) => {
   const localDateTime = utcDateTime.toLocaleString(); // Convert to the user's local time
 
   return (
-    <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md border border-gray-300 cursor-pointer hover:bg-black hover:text-white transition-all duration-100 ease-in-out relative group">
+    <div className="bg-white p-4 sm:p-6 rounded-lg border border-gray-300 cursor-pointer hover:bg-black hover:text-white transition-all duration-100 ease-in-out relative group">
       <div className="flex justify-between items-center mb-1 sm:mb-2">
-        <h3 className="font-bold text-base sm:text-lg transition-colors duration-100 ease-in-out">
+        <h3 className="font-bold font-poppins text-base sm:text-lg transition-colors duration-100 ease-in-out">
           {heading}
         </h3>
-        <div className="px-2 md:px-3 py-0.5 md:py-1 bg-white border border-black rounded-full text-xs md:text-sm font-medium text-black transition-all duration-100 ease-in-out group-hover:bg-black group-hover:text-white group-hover:border-white ml-4">
-          <span className="whitespace-nowrap">{localDateTime}</span>
+        <div className="ml-4">
+          <Tooltip
+            content={localDateTime}
+            placement="top"
+            className="bg-gray-300 text-black rounded-md p-2 text-xs sm:text-sm md:text-base"
+          >
+            <span className="flex items-center">
+              <AiOutlineInfoCircle className="text-black group-hover:text-white transition-colors duration-100 ease-in-out" />
+            </span>
+          </Tooltip>
         </div>
       </div>
-      <p className="text-xs sm:text-sm mb-1 sm:mb-2 transition-colors duration-100 ease-in-out">
+
+      <p className="font-poppins text-xs sm:text-sm mb-1 sm:mb-2 transition-colors duration-100 ease-in-out">
         <span className="font-semibold">Prompt:</span> {prompt}
       </p>
-      <p className="text-xs sm:text-sm mb-1 sm:mb-2 transition-colors duration-100 ease-in-out">
+      <p className="font-poppins text-xs sm:text-sm mb-1 sm:mb-2 transition-colors duration-100 ease-in-out">
         <span className="font-semibold">Questions:</span> {numberOfQuestions}
       </p>
-      <p className="text-xs sm:text-sm transition-colors duration-100 ease-in-out">
+      <p className="font-poppins text-xs sm:text-sm transition-colors duration-100 ease-in-out">
         <span className="font-semibold">Format:</span> {format}
       </p>
     </div>
