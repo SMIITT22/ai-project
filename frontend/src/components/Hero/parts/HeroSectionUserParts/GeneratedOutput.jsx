@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Button,
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
-} from "@material-tailwind/react";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import { Button } from "@material-tailwind/react";
 import {
   fetchLatestGeneratedQuestions,
   selectQuestions,
@@ -15,23 +8,9 @@ import {
   selectError,
 } from "../../redux/questionsSlice";
 import getFriendlyErrorMessage from "../../../../utils/errorHandler";
-
-const SkeletonLoader = () => (
-  <div className="max-w-full lg:max-w-4xl xl:max-w-5xl mx-auto mt-8 mb-8 px-4">
-    <div className="border border-gray-300 rounded-lg bg-white p-6 animate-pulse">
-      {[...Array(3)].map((_, i) => (
-        <div key={i} className="mb-8 pb-8 border-b border-gray-300">
-          <div className="h-4 bg-gray-300 rounded w-3/4 mb-4"></div>
-          <div className="space-y-2">
-            <div className="h-4 bg-gray-300 rounded w-1/2"></div>
-            <div className="h-4 bg-gray-300 rounded w-2/3"></div>
-            <div className="h-4 bg-gray-300 rounded w-1/4"></div>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-);
+import EditQuestion from "./GeneratedOutputParts/EditQuestion";
+import DisplayQuestion from "./GeneratedOutputParts/DisplayQuestion";
+import SkeletonLoader from "./GeneratedOutputParts/SkeletonLoader";
 
 const GeneratedOutput = ({ setNotification }) => {
   const dispatch = useDispatch();
@@ -102,14 +81,13 @@ const GeneratedOutput = ({ setNotification }) => {
   };
 
   if (loading || !isLoadingComplete) {
-    // Always show the SkeletonLoader during the loading phase
     return <SkeletonLoader />;
   }
 
   if (questions && questions.length > 0) {
     // Render the questions list
     return (
-      <div className="max-w-full lg:max-w-4xl xl:max-w-5xl mx-auto mt-8 mb-8 px-4">
+      <div className="max-w-full lg:max-w-4xl xl:max-w-5xl mx-auto mb-8 px-4">
         <div className="border border-gray-300 rounded-lg bg-white">
           <div className="p-6">
             {questions.map((q, index) => {
@@ -188,84 +166,3 @@ const GeneratedOutput = ({ setNotification }) => {
 };
 
 export default GeneratedOutput;
-
-const EditQuestion = ({
-  questionText,
-  options,
-  setQuestionText,
-  setOptions,
-}) => (
-  <>
-    <label className="block text-black text-sm font-bold mb-2">Question</label>
-    <input
-      type="text"
-      value={questionText}
-      onChange={(e) => setQuestionText(e.target.value)}
-      className="w-full mb-4 p-2 border border-gray-300 rounded text-sm sm:text-base"
-    />
-    <label className="block text-black text-sm font-bold">Options</label>
-    <ul className="list-none pl-0 mt-2">
-      {options.map((option, idx) => (
-        <li key={idx} className="mb-2">
-          <input
-            type="text"
-            value={option}
-            onChange={(e) => {
-              const updatedOptions = [...options];
-              updatedOptions[idx] = e.target.value;
-              setOptions(updatedOptions);
-            }}
-            className="w-full p-2 border border-gray-300 rounded text-sm sm:text-base"
-          />
-        </li>
-      ))}
-    </ul>
-  </>
-);
-
-const DisplayQuestion = ({
-  index,
-  question,
-  options,
-  handleEdit,
-  handleDelete,
-  optionLabels,
-}) => (
-  <>
-    <div className="flex items-start justify-between w-full">
-      <p className="font-poppins text-base sm:text-lg text-black mb-2 flex-grow">
-        {index + 1}. {question.question_text || question.question}
-      </p>
-      <div className="ml-2">
-        <Menu placement="bottom-end">
-          <MenuHandler>
-            <div className="cursor-pointer">
-              <BsThreeDotsVertical size={20} />
-            </div>
-          </MenuHandler>
-          <MenuList className="bg-white text-black border-gray-300 shadow-md rounded-lg">
-            <MenuItem onClick={() => handleEdit(index)}>Edit</MenuItem>
-            <hr className="border-t border-gray-300 my-1" />
-            <MenuItem onClick={() => handleDelete(index)}>Delete</MenuItem>
-          </MenuList>
-        </Menu>
-      </div>
-    </div>
-    {options && options.length > 0 && (
-      <ul className="list-none pl-0 mt-4">
-        {options.map((option, idx) => (
-          <li key={idx} className="mb-2">
-            <div className="p-2 rounded-lg bg-gray-100 cursor-pointer hover:bg-gray-200 transition">
-              <span className="font-bold mr-2">
-                {question.question_type === "True/False"
-                  ? ""
-                  : `${optionLabels[idx]}.`}
-              </span>
-              {option}
-            </div>
-          </li>
-        ))}
-      </ul>
-    )}
-  </>
-);
