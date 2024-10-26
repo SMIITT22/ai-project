@@ -11,6 +11,8 @@ import getFriendlyErrorMessage from "../../../../utils/errorHandler";
 import EditQuestion from "./GeneratedOutputParts/EditQuestion";
 import DisplayQuestion from "./GeneratedOutputParts/DisplayQuestion";
 import SkeletonLoader from "./GeneratedOutputParts/SkeletonLoader";
+import GeneratedOutputNavbar from "./GeneratedOutputParts/GeneratedOutputNavbar";
+import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai"; // Import the icons
 
 const GeneratedOutput = ({ setNotification }) => {
   const dispatch = useDispatch();
@@ -89,7 +91,8 @@ const GeneratedOutput = ({ setNotification }) => {
     return (
       <div className="max-w-full lg:max-w-4xl xl:max-w-5xl mx-auto mb-8 px-4">
         <div className="border border-gray-300 rounded-lg bg-white">
-          <div className="p-6">
+          <GeneratedOutputNavbar />
+          <div className="p-6 overflow-y-auto max-h-[600px]">
             {questions.map((q, index) => {
               const options = getOptions(q);
 
@@ -125,7 +128,7 @@ const GeneratedOutput = ({ setNotification }) => {
                         className="whitespace-nowrap bg-gray-300"
                         onClick={() => handleSave(index)}
                       >
-                        <span>Save</span>
+                        <AiOutlineCheck size={18} /> {/* Save Icon */}
                       </Button>
                       <Button
                         variant="gradient"
@@ -134,7 +137,7 @@ const GeneratedOutput = ({ setNotification }) => {
                         className="whitespace-nowrap"
                         onClick={handleCancel}
                       >
-                        <span>Cancel</span>
+                        <AiOutlineClose size={18} /> {/* Cancel Icon */}
                       </Button>
                     </div>
                   )}
@@ -149,7 +152,7 @@ const GeneratedOutput = ({ setNotification }) => {
 
   // Display this if there are no questions after loading is complete
   return (
-    <div className="flex flex-col items-center justify-center mt-8 p-4 sm:p-6 bg-gray-100 rounded-lg shadow-lg">
+    <div className="flex flex-col items-center justify-center mt-8 p-4 sm:p-6 bg-gray-100 rounded-lg border border-gray-200">
       <div className="text-2xl sm:text-3xl mb-3 sm:mb-4 text-black font-poppins">
         <span role="img" aria-label="info">
           📄
