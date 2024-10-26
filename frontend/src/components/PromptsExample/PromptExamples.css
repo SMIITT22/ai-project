@@ -1,4 +1,3 @@
-/* Marquee animation for each row */
 @keyframes row-marquee {
   0% {
     transform: translateX(0);
@@ -8,24 +7,18 @@
   }
 }
 
-/* Common marquee class for all rows */
+/* Marquee Row Setup */
 .marquee-row {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
+  @apply w-full overflow-hidden relative z-0;
 }
 
-/* Gradient overlays ("smoke") on left and right ends */
 .marquee-row::before,
 .marquee-row::after {
   content: "";
-  position: absolute;
-  top: 0;
-  width: 50px; /* Adjust the width as needed */
-  height: 100%;
-  z-index: 1;
+  @apply absolute top-0 h-full w-12 z-10;
 }
 
+/* Light Mode Gradient */
 .marquee-row::before {
   left: 0;
   background: linear-gradient(
@@ -44,37 +37,64 @@
   );
 }
 
+/* Dark Mode Gradient (Using Tailwind's Dark Modifier) */
+.dark .marquee-row::before {
+  background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.dark .marquee-row::after {
+  background: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+/* Marquee Content */
 .marquee-content {
   display: flex;
   white-space: nowrap;
   animation: row-marquee linear infinite;
+  z-index: 0;
 }
 
 .marquee-content > * {
   flex-shrink: 0;
+  z-index: 0;
 }
 
-/* Different speeds for each row */
+/* Different animation speeds for each row */
 .marquee-row.row1 .marquee-content {
-  animation-duration: 30s; /* Slow speed */
+  animation-duration: 30s;
 }
 
 .marquee-row.row2 .marquee-content {
-  animation-duration: 25s; /* Medium speed */
+  animation-duration: 25s;
 }
 
 .marquee-row.row3 .marquee-content {
-  animation-duration: 20s; /* Fast speed */
+  animation-duration: 20s;
 }
 
-/* Prompt click effect */
+/* Prompt Item Styling */
+.prompt-item {
+  @apply border border-gray-300 p-3 rounded-md mr-1 cursor-pointer transition-transform duration-200 ease-in-out;
+  z-index: 0;
+}
+
+.prompt-item {
+  background-color: rgba(255, 255, 255, 0.1); /* Light mode background */
+}
+
+/* Dark mode for Prompt Item */
+.dark .prompt-item {
+  border-color: #4b5563; /* Dark mode border color */
+  color: #d1d5db; /* Light gray text */
+  background-color: rgba(255, 255, 255, 0.1); /* Dark mode active background */
+}
+
+/* Active click effect */
 .prompt-item:active {
-  transform: scale(0.95); /* Slight scaling effect when clicked */
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.1
-  ); /* Add a background color when clicked */
-  transition: transform 0.2s ease, background-color 0.2s ease; /* Smooth transition */
+  transform: scale(0.95);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.dark .prompt-item:active {
+  background-color: rgba(255, 255, 255, 0.1);
 }

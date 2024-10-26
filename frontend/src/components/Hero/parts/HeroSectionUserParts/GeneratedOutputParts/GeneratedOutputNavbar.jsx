@@ -4,10 +4,10 @@ import { FiEdit } from "react-icons/fi";
 
 const GeneratedOutputNavbar = () => {
   return (
-    <div className="sticky top-0 bg-gray-100 p-3 sm:p-4 border-b border-gray-300 flex items-center justify-between">
+    <div className="sticky top-0 bg-gray-100 dark:bg-gray-800 p-3 sm:p-4 border-b border-gray-300 dark:border-gray-700 flex items-center justify-between rounded-t-lg">
       <div className="flex items-center gap-2">
         <button
-          className="bg-black text-white rounded-full p-2 hover:bg-gray-800 transition duration-150"
+          className="bg-black dark:bg-gray-700 text-white rounded-full p-2 hover:bg-gray-800 dark:hover:bg-gray-600 transition duration-150"
           onClick={() => {
             console.log("Redirect to edit page");
           }}
@@ -19,10 +19,10 @@ const GeneratedOutputNavbar = () => {
         <Tooltip
           content="Here you will see the latest generated question set. To see all question sets, go to Generations."
           placement="top"
-          className="bg-black text-white font-poppins rounded-md p-2"
+          className="bg-black dark:bg-gray-700 text-white font-poppins rounded-md p-2"
           style={{ paddingLeft: "8px", paddingRight: "8px" }}
         >
-          <button className="bg-black text-white rounded-full p-2 hover:bg-gray-800 transition duration-150">
+          <button className="bg-black dark:bg-gray-700 text-white rounded-full p-2 hover:bg-gray-800 dark:hover:bg-gray-600 transition duration-150">
             <AiOutlineInfoCircle className="sm:text-base text-sm" />
           </button>
         </Tooltip>

@@ -12,7 +12,7 @@ import EditQuestion from "./GeneratedOutputParts/EditQuestion";
 import DisplayQuestion from "./GeneratedOutputParts/DisplayQuestion";
 import SkeletonLoader from "./GeneratedOutputParts/SkeletonLoader";
 import GeneratedOutputNavbar from "./GeneratedOutputParts/GeneratedOutputNavbar";
-import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai"; // Import the icons
+import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 
 const GeneratedOutput = ({ setNotification }) => {
   const dispatch = useDispatch();
@@ -87,10 +87,9 @@ const GeneratedOutput = ({ setNotification }) => {
   }
 
   if (questions && questions.length > 0) {
-    // Render the questions list
     return (
       <div className="max-w-full lg:max-w-4xl xl:max-w-5xl mx-auto mb-8 px-4">
-        <div className="border border-gray-300 rounded-lg bg-white">
+        <div className="border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900">
           <GeneratedOutputNavbar />
           <div className="p-6 overflow-y-auto max-h-[600px]">
             {questions.map((q, index) => {
@@ -99,7 +98,7 @@ const GeneratedOutput = ({ setNotification }) => {
               return (
                 <div
                   key={index}
-                  className="relative mb-8 border-b border-gray-300 pb-8"
+                  className="relative mb-8 border-b border-gray-300 dark:border-gray-700 pb-8"
                 >
                   <div className="flex flex-col">
                     {editIndex === index ? (
@@ -125,19 +124,19 @@ const GeneratedOutput = ({ setNotification }) => {
                       <Button
                         variant="text"
                         size="sm"
-                        className="whitespace-nowrap bg-gray-300"
+                        className="whitespace-nowrap bg-gray-300 dark:bg-gray-700 text-black dark:text-gray-200"
                         onClick={() => handleSave(index)}
                       >
-                        <AiOutlineCheck size={18} /> {/* Save Icon */}
+                        <AiOutlineCheck size={18} />
                       </Button>
                       <Button
                         variant="gradient"
                         size="sm"
                         color="black"
-                        className="whitespace-nowrap"
+                        className="whitespace-nowrap bg-black text-white hover:bg-gray-800"
                         onClick={handleCancel}
                       >
-                        <AiOutlineClose size={18} /> {/* Cancel Icon */}
+                        <AiOutlineClose size={18} />
                       </Button>
                     </div>
                   )}
@@ -150,18 +149,17 @@ const GeneratedOutput = ({ setNotification }) => {
     );
   }
 
-  // Display this if there are no questions after loading is complete
   return (
-    <div className="flex flex-col items-center justify-center mt-8 p-4 sm:p-6 bg-gray-100 rounded-lg border border-gray-200">
-      <div className="text-2xl sm:text-3xl mb-3 sm:mb-4 text-black font-poppins">
+    <div className="flex flex-col items-center justify-center mt-8 p-4 sm:p-6 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+      <div className="text-2xl sm:text-3xl mb-3 sm:mb-4 text-black dark:text-gray-200 font-poppins">
         <span role="img" aria-label="info">
           📄
         </span>
       </div>
-      <h2 className="text-lg sm:text-xl font-semibold text-black font-poppins mb-2 text-center">
+      <h2 className="text-lg sm:text-xl font-semibold text-black dark:text-gray-200 font-poppins mb-2 text-center">
         No Questions Generated Yet
       </h2>
-      <p className="text-sm sm:text-base text-black font-poppins mb-3 sm:mb-4 text-center">
+      <p className="text-sm sm:text-base text-black dark:text-gray-400 font-poppins mb-3 sm:mb-4 text-center">
         Try generating some questions by using prompts!
       </p>
     </div>

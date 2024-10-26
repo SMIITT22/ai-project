@@ -9,6 +9,9 @@ export default withMT({
         poppins: ["Poppins", "sans-serif"],
         gloria: ["Gloria Hallelujah", "cursive"],
       },
+      colors: {
+        "gray-950": "#111111", // Darker than gray-900
+      },
     },
   },
   plugins: [],

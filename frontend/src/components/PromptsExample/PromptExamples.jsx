@@ -40,20 +40,18 @@ const PromptExamples = () => {
     }
   };
 
-  // Function to duplicate content to prevent gaps
   const duplicateContent = (contentArray) => {
     return [...contentArray, ...contentArray];
   };
 
-  // Function to render marquee items
   const renderMarqueeItems = (contentArray) => {
     return contentArray.map((text, index) => (
       <div
         key={index}
         onClick={() => handlePromptClick(text)}
-        className="border border-gray-300 p-3 rounded-md mr-1 cursor-pointer prompt-item"
+        className="border border-gray-300 dark:border-gray-700 p-3 rounded-md mr-1 cursor-pointer prompt-item dark:text-gray-300"
       >
-        <Typography className="text-gray-700 font-poppins text-sm">
+        <Typography className="text-gray-700 dark:text-gray-300 font-poppins text-sm">
           {text}
         </Typography>
       </div>
@@ -63,34 +61,31 @@ const PromptExamples = () => {
   return (
     <div
       id="sample-questions-section"
-      className="flex flex-col items-center justify-center min-h-screen w-full bg-white text-center pt-20 pb-20"
+      className="flex flex-col items-center justify-center min-h-screen w-full bg-white dark:bg-gradient-to-tr dark:from-black dark:via-black dark:to-gray-950 text-center pt-20 pb-20 transition-colors duration-300"
     >
       <div className="container mx-auto px-4 sm:px-8 flex flex-col items-center">
         <Typography
           variant="h4"
-          className="text-2xl sm:text-3xl md:text-4xl font-poppins text-black font-bold mb-6"
+          className="text-2xl sm:text-3xl md:text-4xl font-poppins text-black dark:text-white font-bold mb-6"
         >
           See examples
         </Typography>
         <Typography
           variant="lead"
-          className="text-base sm:text-lg md:text-xl font-gloria text-gray-700 mb-10 max-w-3xl text-center"
+          className="text-base sm:text-lg md:text-xl font-gloria text-gray-700 dark:text-gray-400 mb-10 max-w-3xl text-center"
         >
           You can see more examples. Select one of the prompts below.
         </Typography>
-        {/* Row 1 */}
         <div className="marquee-row row1">
           <div className="marquee-content">
             {renderMarqueeItems(duplicateContent(row1Content))}
           </div>
         </div>
-        {/* Row 2 */}
         <div className="marquee-row row2 mt-2">
           <div className="marquee-content">
             {renderMarqueeItems(duplicateContent(row2Content))}
           </div>
         </div>
-        {/* Row 3 */}
         <div className="marquee-row row3 mt-2">
           <div className="marquee-content">
             {renderMarqueeItems(duplicateContent(row3Content))}

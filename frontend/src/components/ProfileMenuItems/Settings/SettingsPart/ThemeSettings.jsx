@@ -20,8 +20,10 @@ const ThemeSettings = () => {
 
   return (
     <div>
-      <h2 className="font-semibold text-xl mb-2">Theme Settings</h2>
-      <p className="mb-4">
+      <h2 className="font-poppins font-semibold text-xl mb-2">
+        Theme Settings
+      </h2>
+      <p className="mb-4 font-poppins font-extralight">
         Switch between light and dark mode to customize the app’s appearance.
       </p>
 
@@ -48,7 +50,7 @@ const ThemeSettings = () => {
             }`}
           ></div>
         </label>
-        <span className="ml-2 font-semibold text-gray-700 dark:text-gray-300">
+        <span className="ml-2 font-poppins font-extralight text-gray-700 dark:text-gray-300">
           {isDarkMode ? "Dark Mode Active" : "Light Mode Active"}
         </span>
       </div>

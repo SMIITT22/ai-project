@@ -6,7 +6,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import ProfileMenuScreensHeader from "../../../common/ProfileMenuScreensHeader";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import ProfileSettings from "./SettingsPart/ProfileSettings";
 import BillingSettings from "./SettingsPart/BillingSettings";
 import ThemeSettings from "./SettingsPart/ThemeSettings";
@@ -16,18 +16,18 @@ const Settings = () => {
   const location = useLocation();
 
   // Determine the active tab based on the URL path
-  const getActiveTab = () => {
+  const getActiveTab = useCallback(() => {
     if (location.pathname.endsWith("/billing")) return "billing";
     if (location.pathname.endsWith("/theme")) return "theme";
     return "profile";
-  };
+  }, [location.pathname]);
 
   const [activeTab, setActiveTab] = useState(getActiveTab);
 
   // Update the active tab whenever the path changes
   useEffect(() => {
     setActiveTab(getActiveTab);
-  }, [location.pathname]);
+  }, [getActiveTab, location.pathname]);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -42,10 +42,10 @@ const Settings = () => {
       />
       <div className="container mx-auto px-4 md:px-6 lg:px-8 p-4">
         <div className="flex flex-col md:flex-row mt-4">
-          <div className="flex md:flex-col md:w-1/4 md:pr-4 md:border-r border-gray-200 dark:border-gray-800 transition-colors duration-100 ease-in-out">
+          <div className="flex md:flex-col md:w-1/4 md:pr-4 border-r border-gray-200 dark:border-gray-800 pr-4 transition-colors duration-100 ease-in-out">
             <button
               onClick={() => handleTabChange("profile")}
-              className={`w-full text-left p-2 rounded ${
+              className={`w-full font-poppins text-left p-2 rounded ${
                 activeTab === "profile" ? "bg-gray-200 dark:bg-gray-800" : ""
               }`}
             >
@@ -53,7 +53,7 @@ const Settings = () => {
             </button>
             <button
               onClick={() => handleTabChange("billing")}
-              className={`w-full text-left p-2 rounded ${
+              className={`w-full font-poppins text-left p-2 rounded ${
                 activeTab === "billing" ? "bg-gray-200 dark:bg-gray-800" : ""
               }`}
             >
@@ -61,7 +61,7 @@ const Settings = () => {
             </button>
             <button
               onClick={() => handleTabChange("theme")}
-              className={`w-full text-left p-2 rounded ${
+              className={`w-full font-poppins text-left p-2 rounded ${
                 activeTab === "theme" ? "bg-gray-200 dark:bg-gray-800" : ""
               }`}
             >
@@ -70,7 +70,7 @@ const Settings = () => {
           </div>
 
           {/* Right Content Area with Nested Routes */}
-          <div className="w-full md:w-3/4 p-4 md:p-6 md:pl-6 mt-4 md:mt-0 bg-white dark:bg-gray-900 rounded-md transition-colors duration-100 ease-in-out">
+          <div className="w-full md:w-3/4 p-4 md:p-6 md:pl-6 md:ml-4 mt-4 md:mt-0 bg-white dark:bg-gray-900 rounded-md transition-colors duration-100 ease-in-out">
             <Routes>
               <Route path="profile" element={<ProfileSettings />} />
               <Route path="billing" element={<BillingSettings />} />

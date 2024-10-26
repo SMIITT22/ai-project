@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Select, Option } from "@material-tailwind/react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { FaSpinner } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,7 +32,6 @@ const InputSection = ({ setNotification }) => {
 
     const numQuestionsInt = parseInt(numQuestions, 10);
 
-    // Check if the user is allowed to generate the selected number of questions
     if (!isSubscribed && (numQuestionsInt !== 10 || freeGenerationCount >= 2)) {
       setNotification({
         message: "Free users can generate only 10 questions, up to 2 times.",
@@ -48,7 +46,6 @@ const InputSection = ({ setNotification }) => {
       prompt: prompt,
     };
 
-    // Reset notification before generating
     setNotification({ message: "", type: "" });
 
     dispatch(generateQuestions(requestData))
@@ -61,7 +58,6 @@ const InputSection = ({ setNotification }) => {
         resetForm();
       })
       .catch((error) => {
-        // Use the error handler utility
         const friendlyMessage = getFriendlyErrorMessage(error);
         setNotification({
           message: friendlyMessage,
@@ -76,63 +72,57 @@ const InputSection = ({ setNotification }) => {
     setNumQuestions("10");
   };
 
-  const handleTestPatternChange = (value) => {
-    setTestPattern(value);
-  };
-
-  const handleNumQuestionsChange = (value) => {
-    setNumQuestions(value);
-  };
-
   return (
     <div className="max-w-full sm:max-w-3xl mx-auto mb-6 px-4">
       {/* Dropdowns in one line */}
       <div className="flex flex-col sm:flex-row gap-4 mb-4">
-        <Select
-          value={testPattern}
-          label="Select Question Type"
-          onChange={(value) => handleTestPatternChange(value)}
-          color="gray"
-          animate={{
-            mount: { y: 0 },
-            unmount: { y: 25 },
-          }}
-          className="flex-grow"
-        >
-          <Option value="Only MCQs">Only MCQs</Option>
-          <Option value="Only True/False">Only True/False</Option>
-          <Option value="Both MCQs and True/False">
-            Both MCQs and True/False
-          </Option>
-        </Select>
-        <Select
-          value={numQuestions}
-          onChange={(value) => handleNumQuestionsChange(value)}
-          label="How many Questions?"
-          color="gray"
-          animate={{
-            mount: { y: 0 },
-            unmount: { y: 25 },
-          }}
-          className="flex-grow"
-        >
-          <Option value="10">10</Option>
-          <Option value="25">25</Option>
-          <Option value="50">50</Option>
-        </Select>
+        {/* Custom Select for Test Pattern */}
+        <div className="flex-grow relative">
+          <label className="font-poppins block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Select Question Type
+          </label>
+          <select
+            value={testPattern}
+            onChange={(e) => setTestPattern(e.target.value)}
+            className="block w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-300 rounded-lg py-2 px-3 transition duration-200 ease-in-out focus:outline-none"
+          >
+            <option value="Only MCQs">Only MCQs</option>
+            <option value="Only True/False">Only True/False</option>
+            <option value="Both MCQs and True/False">
+              Both MCQs and True/False
+            </option>
+          </select>
+        </div>
+
+        {/* Custom Select for Number of Questions */}
+        <div className="flex-grow relative">
+          <label className="font-poppins block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            How many Questions?
+          </label>
+          <select
+            value={numQuestions}
+            onChange={(e) => setNumQuestions(e.target.value)}
+            className="block w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-300 rounded-lg py-2 px-3 transition duration-200 ease-in-out focus:outline-none"
+          >
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+          </select>
+        </div>
       </div>
+
       {/* Prompt Input Field */}
       <div className="relative">
-        <div className="w-full flex items-center bg-black shadow-lg border border-gray-300 rounded-full transition duration-300">
+        <div className="w-full flex items-center bg-black dark:bg-gray-900 shadow-lg border border-gray-300 dark:border-gray-700 rounded-full transition duration-300">
           <input
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            className="w-full bg-black border-none text-white rounded-full font-poppins focus:outline-none px-4 py-2 sm:px-6 sm:py-4 pr-12 sm:pr-16 text-xs sm:text-sm md:text-base lg:text-lg"
+            className="w-full bg-black dark:bg-gray-900 border-none text-white dark:text-gray-200 rounded-full font-poppins focus:outline-none px-4 py-2 sm:px-6 sm:py-4 pr-12 sm:pr-16 text-xs sm:text-sm md:text-base lg:text-lg"
             placeholder="Enter Subject & Topic..."
           />
           <div className="pr-1 sm:pr-2">
             <button
-              className="bg-white text-black rounded-full p-2 transition duration-300 ease-in-out"
+              className="bg-white text-black dark:bg-white dark:text-black rounded-full p-2 transition duration-300 ease-in-out"
               onClick={handleGenerate}
               disabled={loading}
             >
@@ -145,6 +135,7 @@ const InputSection = ({ setNotification }) => {
           </div>
         </div>
       </div>
+
       {/* Suggestions */}
       <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-3 mt-6">
         {[
@@ -154,7 +145,7 @@ const InputSection = ({ setNotification }) => {
         ].map((suggestion, index) => (
           <button
             key={index}
-            className="rounded-full border font-poppins border-gray-300 text-xs sm:text-sm md:text-base text-gray-700 px-3 py-1 bg-white hover:text-white hover:bg-black hover:border-black transition duration-200 ease-in-out shadow-sm w-full sm:w-auto"
+            className="rounded-full border font-poppins border-gray-300 dark:border-gray-700 text-xs sm:text-sm md:text-base text-gray-700 dark:text-gray-300 px-3 py-1 bg-white dark:bg-gray-800 hover:text-white hover:bg-black hover:border-black dark:hover:bg-gray-700 transition duration-200 ease-in-out shadow-sm w-full sm:w-auto"
             onClick={() => setPrompt(suggestion)}
           >
             {suggestion}

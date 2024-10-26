@@ -14,7 +14,7 @@ const HeroSectionUser = () => {
   const questions = useSelector(selectQuestions);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
-  
+
   const [notification, setNotification] = useState({
     message: "",
     type: "",
@@ -25,7 +25,7 @@ const HeroSectionUser = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 md:px-6 lg:px-8 py-10">
+    <div className="container mx-auto px-4 md:px-6 lg:px-8 py-10 mt-10 transition-colors duration-300">
       <Heading currentPhrase={"Generate Your Custom Questions!"} />
       {notification.message && (
         <Notification

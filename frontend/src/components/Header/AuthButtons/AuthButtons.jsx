@@ -8,7 +8,7 @@ const AuthButtons = () => {
         <Button
           variant="text"
           size="sm"
-          className="whitespace-nowrap bg-gray-300"
+          className="whitespace-nowrap bg-gray-300 dark:bg-gray-700 dark:text-white"
         >
           <span>Log In</span>
         </Button>
@@ -18,7 +18,7 @@ const AuthButtons = () => {
           variant="gradient"
           size="sm"
           color="black"
-          className="whitespace-nowrap"
+          className="whitespace-nowrap dark:bg-gray-800 dark:hover:bg-gray-900 transition-colors"
         >
           <span>Sign Up</span>
         </Button>

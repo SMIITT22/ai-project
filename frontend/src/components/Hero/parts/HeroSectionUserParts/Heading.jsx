@@ -11,7 +11,7 @@ const Heading = ({ currentPhrase }) => (
     >
       <Typography
         variant="h1"
-        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-poppins text-black"
+        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-poppins text-black dark:text-gray-100 transition-colors duration-300"
       >
         {currentPhrase}
       </Typography>

@@ -42,7 +42,7 @@ const Generations = () => {
 
   if (isLoading) {
     return (
-      <div>
+      <div className="bg-white dark:bg-black text-gray-800 dark:text-gray-100 min-h-screen transition-colors duration-300 ease-in-out">
         <ProfileMenuScreensHeader
           heading="Generations"
           subHeading="See your generated question sets"
@@ -59,7 +59,7 @@ const Generations = () => {
   }
 
   return (
-    <div>
+    <div className="bg-white dark:bg-black text-gray-800 dark:text-gray-100 min-h-screen transition-colors duration-300 ease-in-out">
       <ProfileMenuScreensHeader
         heading="Generations"
         subHeading="See your generated question sets"
@@ -80,6 +80,7 @@ const Generations = () => {
         <Notification
           message={notification.message}
           onClose={handleCloseNotification}
+          className="bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-100"
         />
       )}
     </div>
