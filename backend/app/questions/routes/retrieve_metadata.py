@@ -12,7 +12,7 @@ retrieve_metadata_router = APIRouter()
 async def get_question_request_metadata(
     req: Request,
     db: Session = Depends(get_db),
-    limit: int = 10
+    limit: int = None  # Set limit to None by default to indicate no limit
 ):
     try:
         access_token = req.cookies.get("accessToken")
@@ -26,15 +26,15 @@ async def get_question_request_metadata(
         if not user:
             raise HTTPException(status_code=404, detail="User not found")
         
-        # Query the latest question requests for the user
-        question_requests = (
-            db.query(QuestionRequest)
-            .filter(QuestionRequest.user_id == user.id)
-            .order_by(QuestionRequest.request_time.desc())
-            .limit(limit)
-            .all()
-        )
+        # Query the question requests for the user
+        query = db.query(QuestionRequest).filter(QuestionRequest.user_id == user.id).order_by(QuestionRequest.request_time.desc())
         
+        # Apply limit if specified
+        if limit is not None:
+            query = query.limit(limit)
+        
+        question_requests = query.all()
+
         if not question_requests:
             return []
 
