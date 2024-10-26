@@ -1,5 +1,5 @@
 const NoGenerations = () => (
-  <div className="flex flex-col items-center justify-center mt-12 p-6 bg-gray-100 rounded-lg shadow-md">
+  <div className="flex flex-col items-center justify-center mt-12 p-6 bg-gray-100 rounded-lg border border-gray-200">
     <div className="text-2xl sm:text-3xl mb-3 sm:mb-4 text-black font-poppins">
       <span role="img" aria-label="info">
         📄
