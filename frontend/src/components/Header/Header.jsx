@@ -20,12 +20,12 @@ const Header = () => {
 
   return (
     <div className="w-full">
-      <Navbar className="fixed top-0 z-10 max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4">
-        <div className="flex items-center justify-between text-blue-gray-900">
+      <Navbar className="fixed top-0 z-10 max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 shadow-none border border-gray-300 dark:border-gray-700 bg-white dark:bg-black transition-colors duration-300 ease-in-out">
+        <div className="flex items-center justify-between text-blue-gray-900 dark:text-gray-100 transition-colors duration-300 ease-in-out">
           <Typography
             as="a"
             href="/"
-            className="mr-4 cursor-pointer py-1.5 font-medium font-gloria"
+            className="mr-4 cursor-pointer py-1.5 font-medium font-gloria text-gray-900 dark:text-gray-100 transition-colors duration-300 ease-in-out"
           >
             QG
           </Typography>

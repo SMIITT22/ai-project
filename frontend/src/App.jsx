@@ -49,7 +49,7 @@ const App = () => {
     <div>
       <Header />
       <main className="flex-grow pt-14 sm:pt-14 lg:pt-[4.5rem]">
-      {/* Adding pt-20 (padding-top) to ensure the content starts below the Header */}
+
         <Routes>
           <Route
             path="/"
@@ -96,7 +96,7 @@ const App = () => {
             }
           />
           <Route
-            path="/settings"
+            path="/settings/*"
             element={
               <PrivateRoute>
                 <Settings />
