@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AiOutlineArrowRight } from "react-icons/ai";
+import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
 import { FaSpinner } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,7 +12,7 @@ import {
 } from "../../../../auth/authSlice";
 import getFriendlyErrorMessage from "../../../../utils/errorHandler";
 
-const InputSection = ({ setNotification }) => {
+const PromptInputSection = ({ setNotification }) => {
   const [prompt, setPrompt] = useState("");
   const [testPattern, setTestPattern] = useState("Only MCQs");
   const [numQuestions, setNumQuestions] = useState("10");
@@ -20,6 +20,37 @@ const InputSection = ({ setNotification }) => {
   const loading = useSelector(selectQuestionsLoading);
   const isSubscribed = useSelector(selectIsSubscribed);
   const freeGenerationCount = useSelector(selectFreeGenerationCount);
+  const [currentPromptIndex, setCurrentPromptIndex] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  const prompts = [
+    "Prepare questions on work, energy, and power in physics",
+    "Practice questions on chemical reactions and equations",
+    "Create questions about photosynthesis in plants",
+    "Generate questions on Newton’s laws in mechanics",
+    "Draft questions about the human circulatory system",
+    "Prepare questions on algebra for Grade 8",
+    "Generate MCQs on world geography basics",
+    "Draft questions on basic computer science concepts",
+  ];
+
+  const handleNextPrompt = () => {
+    setFade(false);
+    setTimeout(() => {
+      setCurrentPromptIndex((prevIndex) => (prevIndex + 1) % prompts.length);
+      setFade(true); 
+    }, 200);
+  };
+
+  const handlePreviousPrompt = () => {
+    setFade(false);
+    setTimeout(() => {
+      setCurrentPromptIndex(
+        (prevIndex) => (prevIndex - 1 + prompts.length) % prompts.length
+      );
+      setFade(true);
+    }, 200);
+  };
 
   const handleGenerate = () => {
     if (!prompt) {
@@ -32,7 +63,7 @@ const InputSection = ({ setNotification }) => {
 
     const numQuestionsInt = parseInt(numQuestions, 10);
 
-    if (!isSubscribed && (numQuestionsInt !== 10 || freeGenerationCount >= 2)) {
+    if (!isSubscribed && (numQuestionsInt !== 50 || freeGenerationCount >= 2)) {
       setNotification({
         message: "Free users can generate only 10 questions, up to 2 times.",
         type: "error",
@@ -74,9 +105,7 @@ const InputSection = ({ setNotification }) => {
 
   return (
     <div className="max-w-full sm:max-w-3xl mx-auto mb-6 px-4">
-      {/* Dropdowns in one line */}
       <div className="flex flex-col sm:flex-row gap-4 mb-4">
-        {/* Custom Select for Test Pattern */}
         <div className="flex-grow relative">
           <label className="font-poppins block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Select Question Type
@@ -94,7 +123,6 @@ const InputSection = ({ setNotification }) => {
           </select>
         </div>
 
-        {/* Custom Select for Number of Questions */}
         <div className="flex-grow relative">
           <label className="font-poppins block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             How many Questions?
@@ -111,7 +139,6 @@ const InputSection = ({ setNotification }) => {
         </div>
       </div>
 
-      {/* Prompt Input Field */}
       <div className="relative">
         <div className="w-full flex items-center bg-black dark:bg-gray-900 shadow-lg border border-gray-300 dark:border-gray-700 rounded-full transition duration-300">
           <input
@@ -136,24 +163,35 @@ const InputSection = ({ setNotification }) => {
         </div>
       </div>
 
-      {/* Suggestions */}
-      <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-3 mt-6">
-        {[
-          "Prepare questions on work, energy, and power in physics",
-          "Draft questions about the nervous system in human anatomy",
-          "Practice questions on chemical reactions and equations",
-        ].map((suggestion, index) => (
+      {/* Center-Aligned Prompt Suggestions with Smooth Fade */}
+      <div className="hidden sm:flex items-center justify-center mt-6 relative">
+        <button
+          className="absolute left-0 p-2 bg-gray-200 rounded-full dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-150"
+          onClick={handlePreviousPrompt}
+        >
+          <AiOutlineArrowLeft className="text-gray-700 dark:text-gray-300" />
+        </button>
+        <div
+          className={`text-center px-8 transform transition-opacity duration-500 ease-in-out ${
+            fade ? "opacity-100" : "opacity-0"
+          }`}
+        >
           <button
-            key={index}
-            className="rounded-full border font-poppins border-gray-300 dark:border-gray-700 text-xs sm:text-sm md:text-base text-gray-700 dark:text-gray-300 px-3 py-1 bg-white dark:bg-gray-800 hover:text-white hover:bg-black hover:border-black dark:hover:bg-gray-700 transition duration-200 ease-in-out shadow-sm w-full sm:w-auto"
-            onClick={() => setPrompt(suggestion)}
+            className="rounded-full border font-poppins border-gray-300 dark:border-gray-700 text-xs sm:text-sm md:text-base text-gray-700 dark:text-gray-300 px-4 py-2 bg-white dark:bg-gray-800 hover:text-white hover:bg-black hover:border-black dark:hover:bg-gray-700 transition duration-200 ease-in-out shadow-sm"
+            onClick={() => setPrompt(prompts[currentPromptIndex])}
           >
-            {suggestion}
+            {prompts[currentPromptIndex]}
           </button>
-        ))}
+        </div>
+        <button
+          className="absolute right-0 p-2 bg-gray-200 rounded-full dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-150"
+          onClick={handleNextPrompt}
+        >
+          <AiOutlineArrowRight className="text-gray-700 dark:text-gray-300" />
+        </button>
       </div>
     </div>
   );
 };
 
-export default InputSection;
+export default PromptInputSection;

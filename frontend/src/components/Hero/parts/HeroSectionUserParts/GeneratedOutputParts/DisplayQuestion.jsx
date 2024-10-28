@@ -1,17 +1,17 @@
-import {
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
-} from "@material-tailwind/react";
-import { BsThreeDotsVertical } from "react-icons/bs";
+// import {
+//   Menu,
+//   MenuHandler,
+//   MenuList,
+//   MenuItem,
+// } from "@material-tailwind/react";
+// import { BsThreeDotsVertical } from "react-icons/bs";
 
 const DisplayQuestion = ({
   index,
   question,
   options,
-  handleEdit,
-  handleDelete,
+  // handleEdit,
+  // handleDelete,
   optionLabels,
 }) => (
   <>
@@ -20,7 +20,7 @@ const DisplayQuestion = ({
         {index + 1}. {question.question_text || question.question}
       </p>
       <div className="ml-2">
-        <Menu placement="bottom-end">
+        {/* <Menu placement="bottom-end">
           <MenuHandler>
             <div className="cursor-pointer text-black dark:text-gray-200">
               <BsThreeDotsVertical size={20} />
@@ -41,7 +41,7 @@ const DisplayQuestion = ({
               Delete
             </MenuItem>
           </MenuList>
-        </Menu>
+        </Menu> */}
       </div>
     </div>
     {options && options.length > 0 && (

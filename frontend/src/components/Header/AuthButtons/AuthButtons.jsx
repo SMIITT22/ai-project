@@ -10,7 +10,7 @@ const AuthButtons = () => {
           size="sm"
           className="whitespace-nowrap bg-gray-300 dark:bg-gray-700 dark:text-white"
         >
-          <span>Log In</span>
+          <span className="font-poppins">Log In</span>
         </Button>
       </Link>
       <Link to="/signup">
@@ -20,7 +20,7 @@ const AuthButtons = () => {
           color="black"
           className="whitespace-nowrap dark:bg-gray-800 dark:hover:bg-gray-900 transition-colors"
         >
-          <span>Sign Up</span>
+          <span className="font-poppins">Sign Up</span>
         </Button>
       </Link>
     </>

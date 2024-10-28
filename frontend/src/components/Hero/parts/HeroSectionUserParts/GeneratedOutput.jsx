@@ -4,11 +4,12 @@ import { Button } from "@material-tailwind/react";
 import {
   fetchLatestGeneratedQuestions,
   selectQuestions,
+  selectRequestTime, // Add selector for requestTime
   selectLoading,
   selectError,
 } from "../../redux/questionsSlice";
 import getFriendlyErrorMessage from "../../../../utils/errorHandler";
-import EditQuestion from "./GeneratedOutputParts/EditQuestion";
+// import EditQuestion from "./GeneratedOutputParts/EditQuestion";
 import DisplayQuestion from "./GeneratedOutputParts/DisplayQuestion";
 import SkeletonLoader from "./GeneratedOutputParts/SkeletonLoader";
 import GeneratedOutputNavbar from "./GeneratedOutputParts/GeneratedOutputNavbar";
@@ -17,14 +18,14 @@ import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 const GeneratedOutput = ({ setNotification }) => {
   const dispatch = useDispatch();
   const questions = useSelector(selectQuestions);
+  const requestTime = useSelector(selectRequestTime);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
-
   const [editIndex, setEditIndex] = useState(null);
   const [editedQuestionText, setEditedQuestionText] = useState("");
   const [editedOptions, setEditedOptions] = useState([]);
   const [isLoadingComplete, setIsLoadingComplete] = useState(false);
-
+  console.log(requestTime);
   const optionLabels = ["A", "B", "C", "D"];
 
   useEffect(() => {
@@ -90,7 +91,7 @@ const GeneratedOutput = ({ setNotification }) => {
     return (
       <div className="max-w-full lg:max-w-4xl xl:max-w-5xl mx-auto mb-8 px-4">
         <div className="border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900">
-          <GeneratedOutputNavbar />
+          <GeneratedOutputNavbar requestTime={requestTime} />
           <div className="p-6 overflow-y-auto max-h-[600px]">
             {questions.map((q, index) => {
               const options = getOptions(q);
@@ -102,12 +103,14 @@ const GeneratedOutput = ({ setNotification }) => {
                 >
                   <div className="flex flex-col">
                     {editIndex === index ? (
-                      <EditQuestion
+                      {
+                        /* <EditQuestion
                         questionText={editedQuestionText}
                         options={editedOptions}
                         setQuestionText={setEditedQuestionText}
                         setOptions={setEditedOptions}
-                      />
+                      /> */
+                      }
                     ) : (
                       <DisplayQuestion
                         index={index}
@@ -149,19 +152,22 @@ const GeneratedOutput = ({ setNotification }) => {
     );
   }
 
+  // Center the "No Questions Generated Yet" message in the middle of the container
   return (
-    <div className="flex flex-col items-center justify-center mt-8 p-4 sm:p-6 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-      <div className="text-2xl sm:text-3xl mb-3 sm:mb-4 text-black dark:text-gray-200 font-poppins">
-        <span role="img" aria-label="info">
-          📄
-        </span>
+    <div className="flex h-[600px] items-center justify-center">
+      <div className="flex flex-col items-center justify-center p-6 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+        <div className="text-2xl sm:text-3xl mb-3 sm:mb-4 text-black dark:text-gray-200 font-poppins">
+          <span role="img" aria-label="info">
+            📄
+          </span>
+        </div>
+        <h2 className="text-lg sm:text-xl font-semibold text-black dark:text-gray-200 font-poppins mb-2 text-center">
+          No Questions Generated Yet
+        </h2>
+        <p className="text-sm sm:text-base text-black dark:text-gray-400 font-poppins mb-3 sm:mb-4 text-center">
+          Try generating some questions by using prompts!
+        </p>
       </div>
-      <h2 className="text-lg sm:text-xl font-semibold text-black dark:text-gray-200 font-poppins mb-2 text-center">
-        No Questions Generated Yet
-      </h2>
-      <p className="text-sm sm:text-base text-black dark:text-gray-400 font-poppins mb-3 sm:mb-4 text-center">
-        Try generating some questions by using prompts!
-      </p>
     </div>
   );
 };

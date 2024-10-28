@@ -21,13 +21,6 @@ import LoadingScreen from "./common/LoadingScreen";
 import { useLocation } from "react-router-dom";
 
 const App = () => {
-  const scrollToSampleQuestions = () => {
-    const section = document.getElementById("sample-questions-section");
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const loading = useSelector(selectLoading);
@@ -41,21 +34,23 @@ const App = () => {
     window.scrollTo(0, 0);
   }, [location]);
 
-  if (loading) {
-    return <LoadingScreen message="Loading..." />;
-  }
-
   return (
     <div>
       <Header />
       <main className="flex-grow pt-14 sm:pt-14 lg:pt-[4.5rem]">
-
+        {loading && <LoadingScreen message="Loading..." />}{" "}
         <Routes>
           <Route
             path="/"
             element={
               <>
-                <HeroSection scrollToQuestions={scrollToSampleQuestions} />
+                <HeroSection
+                  scrollToQuestions={() => {
+                    document
+                      .getElementById("sample-questions-section")
+                      ?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                />
                 <PromptExamples />
                 {!isAuthenticated && <SuggesionFlow />}
                 {!isAuthenticated && <QuestionsSection />}
