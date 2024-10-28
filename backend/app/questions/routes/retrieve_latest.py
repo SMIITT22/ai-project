@@ -11,7 +11,7 @@ import uuid
 logger = logging.getLogger("uvicorn.error")
 retrieve_latest_router = APIRouter()
 
-@retrieve_latest_router.get("/latest", response_model=List[dict])
+@retrieve_latest_router.get("/latest", response_model=dict)
 async def get_latest_generated_questions(
     request: Request,
     db: Session = Depends(get_db)
@@ -37,7 +37,7 @@ async def get_latest_generated_questions(
         
         if not latest_request:
             logging.info(f"No question requests found for user ID: {user.id}")
-            return []
+            return {"request_time": None, "questions": []}
         
         # Fetch generated questions for the latest request
         generated_questions = db.query(GeneratedQuestion).filter(
@@ -57,8 +57,13 @@ async def get_latest_generated_questions(
             for question in generated_questions
         ]
         
+        response_data = {
+            "request_time": latest_request.request_time,  # Include request time
+            "questions": questions_response
+        }
+        
         logging.info(f"Returning {len(questions_response)} latest questions for user ID: {user.id}")
-        return questions_response
+        return response_data
     except Exception as e:
         logger.error(f"Database error: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")

@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Async thunk to generate questions
 export const generateQuestions = createAsyncThunk(
   "questions/generateQuestions",
   async (requestData, { rejectWithValue }) => {
@@ -37,6 +36,7 @@ const questionsSlice = createSlice({
   name: "questions",
   initialState: {
     questions: [],
+    requestTime: null, // Initialize requestTime here
     loading: false,
     error: null,
   },
@@ -63,16 +63,18 @@ const questionsSlice = createSlice({
       })
       .addCase(fetchLatestGeneratedQuestions.fulfilled, (state, action) => {
         state.loading = false;
-        state.questions = action.payload;
+        state.questions = action.payload.questions;
+        state.requestTime = action.payload.request_time; // Set requestTime from payload
       })
       .addCase(fetchLatestGeneratedQuestions.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload?.detail || action.error.message;
+        state.error = action.payload;
       });
   },
 });
 
 export const selectQuestions = (state) => state.questions.questions;
+export const selectRequestTime = (state) => state.questions.requestTime;
 export const selectLoading = (state) => state.questions.loading;
 export const selectError = (state) => state.questions.error;
 
