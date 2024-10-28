@@ -1,4 +1,5 @@
 # app/openai_utils.py
+import time
 import openai
 import logging
 import tiktoken
@@ -129,131 +130,89 @@ def generate_questions(test_pattern, num_questions, prompt, retries=3, delay=5):
     if test_pattern not in VALID_QUESTION_TYPES:
         return f"Invalid test pattern. Must be one of {VALID_QUESTION_TYPES}."
 
-    # Construct GPT prompt based on test_pattern
-    gpt_prompt = (
-        f"Generate {num_questions} questions based on the following details:\n"
-        f"Pattern: {test_pattern}\n"
-        f"Subject & Topic: {prompt}\n\n"
-        f"Instructions:\n"
-    )
+    # Split request if large
+    batch_size = 25  # Generate questions in batches to avoid exceeding token limits
+    total_questions = []
 
-    if test_pattern == "Only MCQs":
-        gpt_prompt += (
-            f"- Only generate MCQs. Do not include any True/False or other types of questions.\n"
-            f"- Do not number the questions. Start each question directly with 'MCQ:'.\n"
-            f"- For MCQs, use the format:\n"
-            f"  MCQ: [Question Text]\n"
-            f"  a) Option A\n"
-            f"  b) Option B\n"
-            f"  c) Option C\n"
-            f"  d) Option D\n"
-            f"  Answer: [Correct Option Letter]\n\n"
-            f"Ensure that:\n"
-            f"- Each MCQ has four distinct options.\n"
-            f"- Answers are clearly indicated.\n"
-            f"- Follow the exact formatting as specified above for easy parsing."
-        )
-    elif test_pattern == "Only True/False":
-        gpt_prompt += (
-            f"- Only generate True/False questions. Do not include any MCQs or other types of questions.\n"
-            f"- Do not number the questions. Start each question directly with 'True or False:'.\n"
-            f"- For True/False questions, use the format:\n"
-            f"  True or False: [Question Text]\n"
-            f"  Answer: [True/False]\n\n"
-            f"Ensure that:\n"
-            f"- Answers are clearly indicated as 'True' or 'False'.\n"
-            f"- Follow the exact formatting as specified above for easy parsing."
-        )
-    elif test_pattern == "Both MCQs and True/False":
-        gpt_prompt += (
-            f"- Generate a combination of MCQs and True/False questions. Do not include any other types of questions.\n"
-            f"- Do not number the questions. Start each question directly with 'MCQ:' or 'True or False:'.\n"
-            f"- For MCQs, use the format:\n"
-            f"  MCQ: [Question Text]\n"
-            f"  a) Option A\n"
-            f"  b) Option B\n"
-            f"  c) Option C\n"
-            f"  d) Option D\n"
-            f"  Answer: [Correct Option Letter]\n\n"
-            f"- For True/False questions, use the format:\n"
-            f"  True or False: [Question Text]\n"
-            f"  Answer: [True/False]\n\n"
-            f"Ensure that:\n"
-            f"- Each MCQ has four distinct options.\n"
-            f"- Answers are clearly indicated.\n"
-            f"- Follow the exact formatting as specified above for easy parsing."
+    while len(total_questions) < num_questions:
+        remaining_questions = num_questions - len(total_questions)
+        current_batch_size = min(batch_size, remaining_questions)  # Request only the remaining questions if < batch size
+        
+        gpt_prompt = (
+            f"Generate {current_batch_size} questions based on the following details:\n"
+            f"Pattern: {test_pattern}\n"
+            f"Subject & Topic: {prompt}\n\n"
+            f"Instructions:\n"
         )
 
-    # Count tokens in the prompt
-    input_tokens = count_tokens(gpt_prompt)
-    logging.info(f"Input tokens: {input_tokens}")
-
-    # Calculate max tokens for response (ensure total tokens < 4096 for gpt-3.5-turbo)
-    # Here, we assume a safe buffer and set max_response_tokens accordingly
-    max_response_tokens = 4096 - input_tokens - 500  # 500 tokens buffer
-    max_response_tokens = max_response_tokens if max_response_tokens > 0 else 1500
-
-    attempt = 0
-    while attempt < retries:
-        try:
-            logging.info(f"Attempt {attempt + 1}: Sending request to OpenAI API...")
-            response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {"role": "system", "content": "You are a helpful assistant for generating exam questions."},
-                    {"role": "user", "content": gpt_prompt},
-                ],
-                max_tokens=min(max_response_tokens, 1500),  # Prevent excessively large responses
-                n=1,
-                stop=None,
-                temperature=0.7,
+        # Add specific instructions based on question type
+        if test_pattern == "Only MCQs":
+            gpt_prompt += (
+                "- Only generate MCQs. Do not include any True/False or other types of questions.\n"
+                "Use the format:\n"
+                "  MCQ: [Question Text]\n"
+                "  a) Option A\n"
+                "  b) Option B\n"
+                "  c) Option C\n"
+                "  d) Option D\n"
+                "  Answer: [Correct Option Letter]\n"
+            )
+        elif test_pattern == "Only True/False":
+            gpt_prompt += (
+                "- Only generate True/False questions.\n"
+                "Use the format:\n"
+                "  True or False: [Question Text]\n"
+                "  Answer: [True/False]\n"
+            )
+        elif test_pattern == "Both MCQs and True/False":
+            gpt_prompt += (
+                "- Generate both MCQs and True/False questions.\n"
+                "For MCQs:\n"
+                "  MCQ: [Question Text]\n"
+                "  a) Option A\n"
+                "  b) Option B\n"
+                "  c) Option C\n"
+                "  d) Option D\n"
+                "  Answer: [Correct Option Letter]\n"
+                "For True/False:\n"
+                "  True or False: [Question Text]\n"
+                "  Answer: [True/False]\n"
             )
 
-            generated_text = response.choices[0].message['content'].strip()
-            logging.info("Successfully received response from OpenAI API.")
-            logging.debug(f"Generated Text from OpenAI API:\n{generated_text}")
+        # Retry mechanism for each batch
+        attempt = 0
+        batch_questions = []
+        while attempt < retries and not batch_questions:
+            try:
+                response = openai.ChatCompletion.create(
+                    model="gpt-3.5-turbo",
+                    messages=[{"role": "system", "content": "You are a helpful assistant for generating exam questions."},
+                              {"role": "user", "content": gpt_prompt}],
+                    max_tokens=1500,
+                    n=1,
+                    stop=None,
+                    temperature=0.7,
+                )
 
-            structured_questions = parse_generated_text(generated_text)
+                generated_text = response.choices[0].message['content'].strip()
+                batch_questions = parse_generated_text(generated_text)
 
-            if not structured_questions:
-                logging.error("Parsed questions are empty.")
-                return "Failed to parse the questions correctly. Please try again."
+                # Filter based on the test pattern
+                if test_pattern == "Only MCQs":
+                    batch_questions = [q for q in batch_questions if q['type'] == "MCQ"]
+                elif test_pattern == "Only True/False":
+                    batch_questions = [q for q in batch_questions if q['type'] == "True/False"]
 
-            # Filter out any questions that are not of the specified types
-            filtered_questions = [
-                q for q in structured_questions 
-                if q['type'] in ["MCQ", "True/False"]
-            ]
+                total_questions.extend(batch_questions)
+                logging.info(f"Generated {len(batch_questions)} questions in this batch.")
+            except openai.error.OpenAIError as e:
+                logging.warning(f"OpenAI API error: {e}. Retrying in {delay} seconds...")
+                time.sleep(delay)
+                attempt += 1
+                delay *= 2  # Exponential backoff for retry delay
 
-            # Additional Enforcement: Ensure only desired types based on test_pattern
-            if test_pattern == "Only MCQs":
-                filtered_questions = [q for q in filtered_questions if q['type'] == "MCQ"]
-            elif test_pattern == "Only True/False":
-                filtered_questions = [q for q in filtered_questions if q['type'] == "True/False"]
+    # Log if final count does not match requested number
+    if len(total_questions) != num_questions:
+        logging.warning(f"Expected {num_questions} questions, but generated {len(total_questions)}.")
 
-            if len(filtered_questions) != num_questions:
-                logging.warning(f"Expected {num_questions} questions, but parsed {len(filtered_questions)}.")
-                # Optionally, you can decide to retry or proceed with available questions
-                # Here, we'll proceed with available questions
-            else:
-                logging.info(f"Successfully parsed {len(filtered_questions)} questions.")
-
-            return filtered_questions
-
-        except openai.error.RateLimitError as e:
-            logging.warning(f"Rate limit error: {str(e)}. Retrying in {delay} seconds...")
-            time.sleep(delay)
-            attempt += 1
-            delay *= 2  # Exponential backoff
-        except openai.error.AuthenticationError as e:
-            logging.error(f"Authentication error: {str(e)}")
-            return f"Authentication error: {str(e)}"
-        except openai.error.OpenAIError as e:
-            logging.error(f"OpenAI API error: {str(e)}")
-            return f"An OpenAI API error occurred: {str(e)}"
-        except Exception as e:
-            logging.error(f"An unexpected error occurred: {str(e)}")
-            return f"An unexpected error occurred: {str(e)}"
-
-    logging.error("Failed to generate questions after multiple attempts.")
-    return "Failed to generate questions after multiple attempts."
+    return total_questions[:num_questions]  # Ensure exactly num_questions in return
