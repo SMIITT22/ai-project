@@ -54,7 +54,7 @@ const HeroSectionUser = () => {
 
               <button
                 onClick={() => handleTabSwitch("prompt")}
-                className={`relative z-10 w-1/2 flex items-center justify-center px-4 py-1 font-poppins font-extralight text-sm rounded-full transition-colors duration-300 ${
+                className={`relative w-1/2 flex items-center justify-center px-4 py-1 font-poppins font-extralight text-sm rounded-full transition-colors duration-300 ${
                   activeTab === "prompt"
                     ? "text-white"
                     : "text-gray-700 dark:text-gray-300"
@@ -64,7 +64,7 @@ const HeroSectionUser = () => {
               </button>
               <button
                 onClick={() => handleTabSwitch("text")}
-                className={`relative z-10 w-1/2 flex items-center justify-center px-4 py-1 font-poppins font-extralight text-sm rounded-full transition-colors duration-300 ${
+                className={`relative w-1/2 flex items-center justify-center px-4 py-1 font-poppins font-extralight text-sm rounded-full transition-colors duration-300 ${
                   activeTab === "text"
                     ? "text-white"
                     : "text-gray-700 dark:text-gray-300"

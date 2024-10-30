@@ -4,7 +4,7 @@ import { Button } from "@material-tailwind/react";
 import {
   fetchLatestGeneratedQuestions,
   selectQuestions,
-  selectRequestTime, // Add selector for requestTime
+  selectRequestTime,
   selectLoading,
   selectError,
 } from "../../redux/questionsSlice";
