@@ -70,7 +70,7 @@ const Settings = () => {
           </div>
 
           {/* Right Content Area with Nested Routes */}
-          <div className="w-full md:w-3/4 p-4 md:p-6 md:pl-6 md:ml-4 mt-4 md:mt-0 bg-white dark:bg-gray-900 rounded-md transition-colors duration-100 ease-in-out">
+          <div className="w-full md:w-3/4 p-4 md:p-6 md:pl-6 md:ml-4 mt-4 md:mt-0 bg-gray-100  dark:bg-gray-900 rounded-md transition-colors duration-100 ease-in-out">
             <Routes>
               <Route path="profile" element={<ProfileSettings />} />
               <Route path="billing" element={<BillingSettings />} />

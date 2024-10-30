@@ -77,7 +77,7 @@ const HeroSectionUser = () => {
 
           {/* Input Section with Transition */}
           <div
-            className={`border border-gray-300 dark:border-gray-700 rounded-lg p-3 pt-8 shadow-sm transform transition-all duration-500 ease-in-out w-full ${
+            className={`bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg p-3 pt-8 shadow-sm transform transition-all duration-500 ease-in-out w-full ${
               transitioning
                 ? "opacity-0 translate-y-5"
                 : "opacity-100 translate-y-0"

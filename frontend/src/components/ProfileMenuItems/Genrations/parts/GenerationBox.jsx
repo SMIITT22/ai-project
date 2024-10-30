@@ -7,13 +7,13 @@ const GenerationBox = ({ generation, isLoading }) => {
     return (
       <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-md border border-gray-300 dark:border-gray-700 animate-pulse">
         <div className="flex justify-between items-center mb-2">
-          <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded w-3/4"></div>{" "}
-          <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-1/6"></div>{" "}
+          <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded w-3/4"></div>
+          <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-1/6"></div>
         </div>
         <div className="space-y-2">
-          <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-2/3"></div>{" "}
-          <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-1/2"></div>{" "}
-          <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-1/3"></div>{" "}
+          <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-2/3"></div>
+          <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-1/2"></div>
+          <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-1/3"></div>
         </div>
       </div>
     );

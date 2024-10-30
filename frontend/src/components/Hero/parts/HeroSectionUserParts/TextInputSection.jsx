@@ -16,6 +16,7 @@ const TextInputSection = ({ setNotification }) => {
   const MIN_WORDS = 50;
   const MAX_WORDS = 500;
 
+  // Function to count words in the input
   const countWords = (str) => {
     return str.trim().split(/\s+/).filter(Boolean).length;
   };
@@ -33,7 +34,7 @@ const TextInputSection = ({ setNotification }) => {
 
     if (wordCount < MIN_WORDS) {
       setNotification({
-        message: `Please enter at least ${MIN_WORDS} words. You have entered only ${wordCount}.`,
+        message: "Please enter correct text (at least 50 words)",
         type: "error",
       });
       return;
@@ -41,7 +42,7 @@ const TextInputSection = ({ setNotification }) => {
 
     if (wordCount > MAX_WORDS) {
       setNotification({
-        message: `Please limit your input to ${MAX_WORDS} words. You have entered ${wordCount}.`,
+        message: "Please reduce the text size.",
         type: "error",
       });
       return;

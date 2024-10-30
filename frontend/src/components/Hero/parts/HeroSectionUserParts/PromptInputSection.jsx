@@ -38,7 +38,7 @@ const PromptInputSection = ({ setNotification }) => {
     setFade(false);
     setTimeout(() => {
       setCurrentPromptIndex((prevIndex) => (prevIndex + 1) % prompts.length);
-      setFade(true); 
+      setFade(true);
     }, 200);
   };
 
