@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Depends, Request
 from sqlalchemy.orm import Session
 from app.db import get_db
-from app.db.models import User, QuestionRequest
+from app.db.models import User, QuestionRequest, TextQuestionRequest
 from app.core.security import verify_access_token
 import logging
 
@@ -12,7 +12,7 @@ retrieve_metadata_router = APIRouter()
 async def get_question_request_metadata(
     req: Request,
     db: Session = Depends(get_db),
-    limit: int = None  # Set limit to None by default to indicate no limit
+    limit: int = None
 ):
     try:
         access_token = req.cookies.get("accessToken")
@@ -26,32 +26,50 @@ async def get_question_request_metadata(
         if not user:
             raise HTTPException(status_code=404, detail="User not found")
         
-        # Query the question requests for the user
-        query = db.query(QuestionRequest).filter(QuestionRequest.user_id == user.id).order_by(QuestionRequest.request_time.desc())
-        
-        # Apply limit if specified
-        if limit is not None:
-            query = query.limit(limit)
-        
-        question_requests = query.all()
+        # Query prompt-based requests
+        prompt_requests = db.query(QuestionRequest).filter(
+            QuestionRequest.user_id == user.id
+        ).order_by(QuestionRequest.request_time.desc()).all()
 
-        if not question_requests:
-            return []
+        # Query text-based requests
+        text_requests = db.query(TextQuestionRequest).filter(
+            TextQuestionRequest.user_id == user.id
+        ).order_by(TextQuestionRequest.request_time.desc()).all()
 
-        # Format the response data
-        metadata_response = [
-            {
+        # Prepare metadata from both prompt and text requests
+        metadata_response = []
+
+        for request in prompt_requests:
+            metadata_response.append({
                 "id": request.id,
-                "heading": f"Request {request.id}",  # Using ID as a placeholder for heading
+                "type": "prompt",
+                "heading": f"Prompt Request {request.id}",
                 "date": request.request_time.strftime("%Y-%m-%d"),
                 "time": request.request_time.strftime("%H:%M:%S"),
                 "numberOfQuestions": request.num_questions,
-                "prompt": request.prompt,
+                "content": request.prompt,  # use 'content' for flexibility
                 "question_format": request.question_format
-            }
-            for request in question_requests
-        ]
-        
+            })
+
+        for request in text_requests:
+            metadata_response.append({
+                "id": request.id,
+                "type": "text",
+                "heading": f"Text Request {request.id}",
+                "date": request.request_time.strftime("%Y-%m-%d"),
+                "time": request.request_time.strftime("%H:%M:%S"),
+                "numberOfQuestions": request.num_questions,
+                "content": request.text_content,  # use 'content' for flexibility
+                "question_format": "Both MCQs and True/False"  # Default format for text-based requests
+            })
+
+        # Sort by request_time in descending order
+        metadata_response.sort(key=lambda x: x["date"] + x["time"], reverse=True)
+
+        # Apply limit if specified
+        if limit is not None:
+            metadata_response = metadata_response[:limit]
+
         return metadata_response
 
     except HTTPException as he:
