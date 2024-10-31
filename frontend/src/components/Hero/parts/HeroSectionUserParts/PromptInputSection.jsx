@@ -145,7 +145,7 @@ const PromptInputSection = ({ setNotification }) => {
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             className="w-full bg-black dark:bg-gray-900 border-none text-white dark:text-gray-200 rounded-full font-poppins focus:outline-none px-4 py-2 sm:px-6 sm:py-4 pr-12 sm:pr-16 text-xs sm:text-sm md:text-base lg:text-lg"
-            placeholder="Enter Subject & Topic..."
+            placeholder="Enter your prompt"
           />
           <div className="pr-1 sm:pr-2">
             <button

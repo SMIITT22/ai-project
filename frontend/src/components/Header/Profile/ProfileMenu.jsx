@@ -29,10 +29,11 @@ const ProfileMenu = ({ userEmail = "" }) => {
     dispatch(logoutUser());
   };
 
-  const truncatedEmail =
-    userEmail?.length > 20
-      ? `${userEmail.substring(0, 17)}...`
-      : userEmail || "Guest";
+  const truncateEmail = (email) => {
+    return email.length > 20 ? `${email.slice(0, 17)}...` : email;
+  };
+
+  const displayedEmail = truncateEmail(userEmail);
 
   return (
     <div className="relative font-poppins">
@@ -47,7 +48,7 @@ const ProfileMenu = ({ userEmail = "" }) => {
         </MenuHandler>
         <MenuList className="absolute z-10 min-w-[150px] max-w-[200px] overflow-auto rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-black p-1 shadow-md focus:outline-none transition-colors duration-300 ease-in-out">
           <Typography className="p-2 text-gray-800 dark:text-gray-100 text-sm font-medium cursor-default">
-            {truncatedEmail}
+            {displayedEmail}
           </Typography>
           <hr className="my-1 border-gray-300 dark:border-gray-600" />
           <MenuItem

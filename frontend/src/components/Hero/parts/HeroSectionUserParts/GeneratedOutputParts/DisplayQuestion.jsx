@@ -49,7 +49,7 @@ const DisplayQuestion = ({
         {options.map((option, idx) => (
           <li key={idx} className="mb-2">
             <div className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-black dark:text-gray-200 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-              <span className="font-bold mr-2">
+              <span className="font-extralight font-poppins mr-2">
                 {question.question_type === "True/False"
                   ? ""
                   : `${optionLabels[idx]}.`}

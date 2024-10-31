@@ -140,7 +140,7 @@ const authSlice = createSlice({
         state.loading = true;
       })
       .addCase(checkUserStatus.fulfilled, (state, action) => {
-        state.user = action.payload.user.email;
+        state.user = action.payload.user;
         state.isSubscribed = action.payload.user.is_subscribed;
         state.freeGenerationCount = action.payload.user.free_generation_count;
         state.status = "succeeded";
