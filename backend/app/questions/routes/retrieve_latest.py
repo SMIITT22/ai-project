@@ -55,7 +55,7 @@ async def get_latest_generated_questions(
             request_type = "text"
         else:
             logging.info(f"No question requests found for user ID: {user.id}")
-            return {"request_time": None, "questions": []}
+            return {"request_time": None, "question_set_name": None, "questions": []}
 
         # Fetch generated questions based on the request type
         if request_type == "prompt":
@@ -82,6 +82,7 @@ async def get_latest_generated_questions(
         
         response_data = {
             "request_time": latest_request.request_time,
+            "question_set_name": latest_request.question_set_name,
             "questions": questions_response
         }
         

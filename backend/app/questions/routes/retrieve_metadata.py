@@ -19,8 +19,6 @@ async def get_question_request_metadata(
         if not access_token:
             raise HTTPException(status_code=401, detail="Not authenticated")
         token_data = verify_access_token(access_token)
-        if not token_data:
-            raise HTTPException(status_code=401, detail="Invalid token")
         user_email = token_data.get("sub")
         user = db.query(User).filter(User.email == user_email).first()
         if not user:
@@ -43,11 +41,11 @@ async def get_question_request_metadata(
             metadata_response.append({
                 "id": request.id,
                 "type": "prompt",
-                "heading": f"Prompt Request {request.id}",
+                "heading": request.question_set_name if request.question_set_name else f"Prompt Request {request.id}",
                 "date": request.request_time.strftime("%Y-%m-%d"),
                 "time": request.request_time.strftime("%H:%M:%S"),
                 "numberOfQuestions": request.num_questions,
-                "content": request.prompt,  # use 'content' for flexibility
+                "content": request.prompt,
                 "question_format": request.question_format
             })
 
@@ -55,12 +53,12 @@ async def get_question_request_metadata(
             metadata_response.append({
                 "id": request.id,
                 "type": "text",
-                "heading": f"Text Request {request.id}",
+                "heading": request.question_set_name if request.question_set_name else f"Text Request {request.id}",
                 "date": request.request_time.strftime("%Y-%m-%d"),
                 "time": request.request_time.strftime("%H:%M:%S"),
                 "numberOfQuestions": request.num_questions,
-                "content": request.text_content,  # use 'content' for flexibility
-                "question_format": "Both MCQs and True/False"  # Default format for text-based requests
+                "content": request.text_content,
+                "question_format": request.question_format
             })
 
         # Sort by request_time in descending order
