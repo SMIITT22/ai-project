@@ -10,19 +10,21 @@ class QuestionFormat(str, Enum):
 class QuestionRequestSchema(BaseModel):
     num_questions: int
     prompt: str
-    question_format: QuestionFormat
+    question_format: str
+    question_set_name: str
 
-# New schema for text-based question requests
 class TextQuestionRequestSchema(BaseModel):
     num_questions: int = 15
     text: str
     question_format: QuestionFormat = QuestionFormat.BOTH
+    question_set_name: str
 
     class Config:
         schema_extra = {
             "example": {
                 "num_questions": 15,
                 "text": "This is an example text for generating questions.",
-                "question_format": "Both MCQs and True/False"
+                "question_format": "Both MCQs and True/False",
+                "question_set_name": "Sample Quiz on Basic Concepts"
             }
         }

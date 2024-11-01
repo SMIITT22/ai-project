@@ -19,6 +19,7 @@ class QuestionRequest(Base):
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     num_questions = Column(Integer)
     prompt = Column(String)
+    question_set_name = Column(String)
     request_time = Column(DateTime, default=datetime.utcnow)
     question_format = Column(String, default="Both MCQs and True/False")
 
@@ -45,6 +46,7 @@ class TextQuestionRequest(Base):
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     num_questions = Column(Integer, default=15)
     text_content = Column(String, nullable=False)
+    question_set_name = Column(String)
     request_time = Column(DateTime, default=datetime.utcnow)
     question_format = Column(String, default="Both MCQs and True/False")
 
