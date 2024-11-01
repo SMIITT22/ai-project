@@ -56,6 +56,7 @@ async def generate_questions_from_text_endpoint(
         # Validate user limits and prepare parameters
         num_questions = request_data.num_questions or 15
         question_format = "Both MCQs and True/False"
+        question_set_name = request_data.question_set_name  # Get question set name
 
         if not user.is_subscribed and user.free_generation_count >= 2:
             raise HTTPException(status_code=403, detail="Free generation limit reached.")
@@ -71,7 +72,8 @@ async def generate_questions_from_text_endpoint(
             num_questions=num_questions,
             text_content=text_content,
             request_time=datetime.utcnow(),
-            question_format=question_format
+            question_format=question_format,
+            question_set_name=question_set_name  # Save question set name
         )
         db.add(new_request)
         db.commit()

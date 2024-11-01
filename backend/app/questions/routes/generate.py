@@ -26,34 +26,43 @@ async def generate_questions_endpoint(
         token_data = verify_access_token(access_token)
         if not token_data:
             raise HTTPException(status_code=401, detail="Invalid token")
+        
         user_email = token_data.get("sub")
         user = db.query(User).filter(User.email == user_email).first()
         if not user:
             raise HTTPException(status_code=404, detail="User not found")
+
         num_questions = request_data.num_questions
         prompt = request_data.prompt
         question_format = request_data.question_format
-        
+        question_set_name = request_data.question_set_name
+
         valid_question_formats = ["Only MCQs", "Only True/False", "Both MCQs and True/False"]
         if question_format not in valid_question_formats:
             raise HTTPException(status_code=400, detail="Invalid question format.")        
+
         if not user.is_subscribed and user.free_generation_count >= 2:
             raise HTTPException(status_code=403, detail="Free generation limit reached.")
         if not user.is_subscribed and num_questions != 10:
             raise HTTPException(status_code=403, detail="Free users are limited to generating 10 questions.")        
+        
         questions = openai_utils_for_prompt.generate_questions(question_format, num_questions, prompt)
         if isinstance(questions, str):
             raise HTTPException(status_code=500, detail=questions)        
+
         new_request = QuestionRequest(
             user_id=user.id,
             num_questions=num_questions,
             prompt=prompt,
+            question_set_name=question_set_name,
             request_time=datetime.utcnow(),
             question_format=question_format
         )
+        
         db.add(new_request)
         db.commit()
         db.refresh(new_request)
+
         for question in questions:
             new_question = GeneratedQuestion(
                 request_id=new_request.id,
@@ -63,10 +72,13 @@ async def generate_questions_endpoint(
                 correct_answer=question['answer']
             )
             db.add(new_question)
+        
         db.commit()
+        
         if not user.is_subscribed:
             user.free_generation_count += 1
             db.commit()
+        
         return {
             "message": "Questions generated successfully",
             "request_id": new_request.id,
