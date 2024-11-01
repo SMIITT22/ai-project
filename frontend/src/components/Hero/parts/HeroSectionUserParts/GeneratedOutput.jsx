@@ -25,7 +25,7 @@ const GeneratedOutput = ({ setNotification }) => {
   const [editedQuestionText, setEditedQuestionText] = useState("");
   const [editedOptions, setEditedOptions] = useState([]);
   const [isLoadingComplete, setIsLoadingComplete] = useState(false);
-  console.log(requestTime);
+  
   const optionLabels = ["A", "B", "C", "D"];
 
   useEffect(() => {
