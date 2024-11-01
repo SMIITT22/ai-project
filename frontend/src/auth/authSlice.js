@@ -7,7 +7,7 @@ import axios from "axios";
 
 const initialState = {
   user: null,
-  isSubscribed: false, 
+  isSubscribed: false,
   freeGenerationCount: 0,
   status: "idle", // 'idle' | 'loading' | 'succeeded' | 'failed'
   loading: true,
@@ -115,6 +115,8 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
+        state.isSubscribed = action.payload.user.is_subscribed;
+        state.freeGenerationCount = action.payload.user.free_generation_count;
         state.status = "succeeded";
         state.loading = false;
       })

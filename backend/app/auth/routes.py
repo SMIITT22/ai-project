@@ -57,19 +57,20 @@ async def login(user_data: LoginRequest, response: Response, db: Session = Depen
 
     # Set the access token in a cookie
     response.set_cookie(
-        key="accessToken",  # Name of the cookie
-        value=access_token,  # Value of the cookie (JWT token)
-        httponly=True,  # Prevents JavaScript access to the cookie
-        max_age=60*60*24,  # Expires in 1 day
-        samesite='None',  # Adjust according to your needs ('None' if cross-origin)
-        secure=True,  # Set to True if you are using HTTPS
+        key="accessToken",
+        value=access_token,
+        httponly=True,
+        max_age=60*60*24,
+        samesite='None',
+        secure=True,
     )
 
     return {
         "message": "Login successful",
         "user": {
-            "id": user.id,
-            "email": user.email
+            "email": user.email,
+            "is_subscribed": user.is_subscribed,
+            "free_generation_count": user.free_generation_count
         }
     }
 
