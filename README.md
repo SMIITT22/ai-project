@@ -10,7 +10,6 @@ This is a web application that generates customized question paper sets based on
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Overview
 The AI Question Paper Generator allows users to create tailored question papers by specifying parameters like difficulty, topic, or question type. It leverages the Open AI API for intelligent question generation, stores data in PostgreSQL, and provides a seamless experience with a React frontend and FastAPI backend. Authentication is built from scratch for secure user access.
