@@ -114,7 +114,3 @@ Contributions are welcome! Please follow these steps:
    ```bash
    git push origin feature-branch
    ```
-5. **Open a pull request.**
-
----
-Happy Coding! 🚀
